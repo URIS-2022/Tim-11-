@@ -8,7 +8,7 @@ using AutoMapper;
 
 namespace WebVella.Erp.Plugins.Mail.Api.AutoMapper
 {
-	public class MailPluginAutoMapperConfiguration
+	public static class MailPluginAutoMapperConfiguration
 	{
 		public static MapperConfigurationExpression MappingExpressions = new MapperConfigurationExpression();
 
