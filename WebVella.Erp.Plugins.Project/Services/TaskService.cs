@@ -92,7 +92,7 @@ namespace WebVella.Erp.Plugins.Project.Services
 
 		public EntityRecord GetTask(Guid taskId)
 		{
-			var projectRecord = new EntityRecord();
+			
 			var eqlCommand = " SELECT * from task WHERE id = @taskId";
 			var eqlParams = new List<EqlParameter>() { new EqlParameter("taskId", taskId) };
 

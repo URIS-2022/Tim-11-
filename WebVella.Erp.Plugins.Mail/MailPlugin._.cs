@@ -70,10 +70,7 @@ namespace WebVella.Erp.Plugins.Mail
 									var exception = ex;
 									throw ex;
 								}
-								catch (Exception)
-								{
-									throw;
-								}
+								
 							}
 						}
 
@@ -114,10 +111,7 @@ namespace WebVella.Erp.Plugins.Mail
 									var exception = ex;
 									throw ex;
 								}
-								catch (Exception)
-								{
-									throw;
-								}
+								
 							}
 						}
 

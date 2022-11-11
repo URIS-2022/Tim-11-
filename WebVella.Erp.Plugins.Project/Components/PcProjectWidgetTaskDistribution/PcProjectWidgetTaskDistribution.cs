@@ -80,7 +80,7 @@ namespace WebVella.Erp.Plugins.Project.Components
 					if (projectId == Guid.Empty)
 						return await Task.FromResult<IViewComponentResult>(Content("Error: ProjectId is required"));
 
-					var projectRecord = new ProjectService().Get(projectId);
+					
 					var projectTasks = new TaskService().GetTaskQueue(projectId,null);
 
 					var users = new UserService().GetAll();

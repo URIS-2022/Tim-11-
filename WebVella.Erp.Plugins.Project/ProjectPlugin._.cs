@@ -222,10 +222,7 @@ namespace WebVella.Erp.Plugins.Project
 									var exception = ex;
 									throw ex;
 								}
-								catch (Exception)
-								{
-									throw;
-								}
+								
 							}
 						}
 						#endregion

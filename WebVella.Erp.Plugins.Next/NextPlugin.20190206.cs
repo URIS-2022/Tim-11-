@@ -12,15 +12,8 @@ namespace WebVella.Erp.Plugins.Next
 	{
 		private static void Patch20190206(EntityManager entMan, EntityRelationManager relMan, RecordManager recMan)
 		{
-			#region << ***Delete relation*** Relation name: solutation_1n_contact >>
-			{
-				{
-					var response = relMan.Delete(new Guid("54a6e20a-9e94-45fb-b77c-e2bb35cb20fc"));
-					if (!response.Success)
-						throw new Exception("System error 10060. Relation: solutation_1n_contact Delete. Message:" + response.Message);
-				}
-			}
-			#endregion
+            DeleteRelationSolutation1nContact();
+			
 
 			#region << ***Delete relation*** Relation name: solutation_1n_account >>
 			{
@@ -1392,5 +1385,13 @@ namespace WebVella.Erp.Plugins.Next
 
 
 		}
-	}
+        #region << ***Delete relation*** Relation name: solutation_1n_contact >>
+			private static void()
+            {			
+				var response = relMan.Delete(new Guid("54a6e20a-9e94-45fb-b77c-e2bb35cb20fc"));
+				if (!response.Success)
+					throw new Exception("System error 10060. Relation: solutation_1n_contact Delete. Message:" + response.Message);
+			}
+			#endregion
+    }
 }
