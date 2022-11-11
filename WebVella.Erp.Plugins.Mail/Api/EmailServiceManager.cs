@@ -83,7 +83,7 @@ namespace WebVella.Erp.Plugins.Mail.Api
 			{
 				var result = new EqlCommand("SELECT * FROM smtp_service WHERE name = @name", new EqlParameter("name", name)).Execute();
 				if (result.Count == 0)
-					throw new NullReferenceException($"SmtpService with name '{name}' not found.");
+					throw new ArgumentNullException($"SmtpService with name '{name}' not found.");
 
 				smtpServiceRec = result[0];
 			}
