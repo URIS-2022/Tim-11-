@@ -13,7 +13,7 @@ namespace WebVella.Erp.Plugins.Mail
 {
 	public partial class MailPlugin : ErpPlugin
 	{
-		private static void Patch20190419(EntityManager entMan, EntityRelationManager relMan, RecordManager recMan)
+		private static void Patch20190419(EntityManager entMan, RecordManager recMan)
 		{
 			#region << ***Create field***  Entity: email Field Name: sender >>
 			{
