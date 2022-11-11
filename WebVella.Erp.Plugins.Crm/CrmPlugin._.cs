@@ -89,7 +89,7 @@ namespace WebVella.Erp.Plugins.Crm
 					catch (ValidationException ex)
 					{
 						connection.RollbackTransaction();
-						throw ex;
+						throw;
 					}
 					catch (Exception)
 					{
