@@ -113,7 +113,7 @@ namespace WebVella.Erp.ConsoleApp
 							newRec["name"] = "New Role";
 							var result = recMan.CreateRecord("role", newRec);
 							if (!result.Success)
-								throw new Exception(result.Message);
+								throw new ArgumentException(result.Message);
 
 							Console.WriteLine($"=== roles after create ===");
 							existingRoles = new EqlCommand("SELECT * FROM role").Execute();
