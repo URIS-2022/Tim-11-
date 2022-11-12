@@ -155,7 +155,7 @@ namespace WebVella.Erp.Plugins.Project
 								}
 								catch (ValidationException ex)
 								{
-									var exception = ex;
+									
 									throw ex;
 								}
 								catch (Exception)

@@ -790,7 +790,7 @@ namespace WebVella.Erp.Web.Models
 		}
 
 		//ModelPropertyWrapper
-		private class MPW
+		private sealed class MPW
 		{
 			public MPT Type { get; set; }
 

@@ -63,7 +63,7 @@ namespace WebVella.Erp.Plugins.Mail
 								try
 								{
 									currentPluginSettings.Version = patchVersion;
-									Patch20190215(entMan, relMan, recMan);
+									Patch20190215(entMan,relMan);
 								}
 								catch (ValidationException ex)
 								{
@@ -82,17 +82,14 @@ namespace WebVella.Erp.Plugins.Mail
 								try
 								{
 									currentPluginSettings.Version = patchVersion;
-									Patch20190419(entMan, relMan, recMan);
+									Patch20190419(entMan, recMan);
 								}
 								catch (ValidationException ex)
 								{
 									var exception = ex;
 									throw ex;
 								}
-								catch (Exception)
-								{
-									throw;
-								}
+								
 							}
 						}
 
@@ -172,10 +169,7 @@ namespace WebVella.Erp.Plugins.Mail
 									var exception = ex;
 									throw ex;
 								}
-								catch (Exception)
-								{
-									throw;
-								}
+								
 							}
 						}
 

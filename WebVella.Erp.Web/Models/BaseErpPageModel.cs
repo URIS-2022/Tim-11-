@@ -223,7 +223,7 @@ namespace WebVella.Erp.Web.Models
 							default:
 								throw new Exception("Type not found");
 						}
-						continue;
+						
 					}
 				}
 				//Convert to MenuItem
