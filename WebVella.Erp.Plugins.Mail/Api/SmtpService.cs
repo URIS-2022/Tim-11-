@@ -99,6 +99,7 @@ namespace WebVella.Erp.Plugins.Mail.Api
             if (!string.IsNullOrWhiteSpace(DefaultReplyToEmail))
                 message.ReplyTo.Add(new MailboxAddress(DefaultReplyToEmail, DefaultReplyToEmail));
 
+<<<<<<< HEAD
             message.Subject = subject;
 
             var bodyBuilder = new BodyBuilder();
@@ -146,6 +147,55 @@ namespace WebVella.Erp.Plugins.Mail.Api
                 //accept all SSL certificates (in case the server supports STARTTLS)
                 client.ServerCertificateValidationCallback = (s, c, h, e) =>
                 {
+=======
+			message.Subject = subject;
+
+			var bodyBuilder = new BodyBuilder();
+			bodyBuilder.HtmlBody = htmlBody;
+			bodyBuilder.TextBody = textBody;
+
+			if (attachments != null && attachments.Count > 0)
+			{
+				foreach (var att in attachments)
+				{
+					var filepath = att;
+
+					if (!filepath.StartsWith("/"))
+						filepath = "/" + filepath;
+
+					filepath = filepath.ToLowerInvariant();
+
+					if (filepath.StartsWith("/fs"))
+						filepath = filepath.Substring(3);
+
+					DbFileRepository fsRepository = new DbFileRepository();
+					var file = fsRepository.Find(filepath);
+					var bytes = file.GetBytes();
+
+					var extension = Path.GetExtension(filepath).ToLowerInvariant();
+					new FileExtensionContentTypeProvider().Mappings.TryGetValue(extension, out string mimeType);
+
+					var attachment = new MimePart(mimeType)
+					{
+						Content = new MimeContent(new MemoryStream(bytes)),
+						ContentDisposition = new ContentDisposition(ContentDisposition.Attachment),
+						ContentTransferEncoding = ContentEncoding.Base64,
+						FileName = Path.GetFileName(filepath)
+					};
+
+					bodyBuilder.Attachments.Add(attachment);
+				}
+			}
+
+			SmtpInternalService.ProcessHtmlContent(bodyBuilder);
+			message.Body = bodyBuilder.ToMessageBody();
+
+			using (var client = new SmtpClient())
+			{
+				//accept all SSL certificates (in case the server supports STARTTLS)
+				client.ServerCertificateValidationCallback = (s, c, h, e) =>
+				{
+>>>>>>> S4830
                     if (e == SslPolicyErrors.None)
                         return true;
 
@@ -153,6 +203,7 @@ namespace WebVella.Erp.Plugins.Mail.Api
 
                     // Do not allow this client to communicate with unauthenticated servers.
                     return false;
+<<<<<<< HEAD
                 };
 
                 client.Connect(Server, Port, ConnectionSecurity);
@@ -840,3 +891,835 @@ namespace WebVella.Erp.Plugins.Mail.Api
         }
     }
 }
+=======
+                } ;
+
+				client.Connect(Server, Port, ConnectionSecurity);
+
+				if (!string.IsNullOrWhiteSpace(Username))
+					client.Authenticate(Username, Password);
+
+				client.Send(message);
+				client.Disconnect(true);
+			}
+
+			Email email = new Email();
+			email.Id = Guid.NewGuid();
+			email.Sender = new EmailAddress { Address = DefaultSenderEmail, Name = DefaultSenderName };
+			email.ReplyToEmail = DefaultReplyToEmail;
+			email.Recipients = new List<EmailAddress> { recipient };
+			email.Subject = subject;
+			email.ContentHtml = htmlBody;
+			email.ContentText = textBody;
+			email.CreatedOn = DateTime.UtcNow;
+			email.SentOn = email.CreatedOn;
+			email.Priority = EmailPriority.Normal;
+			email.Status = EmailStatus.Sent;
+			email.ServerError = string.Empty;
+			email.ScheduledOn = null;
+			email.RetriesCount = 0;
+			email.ServiceId = Id;
+			if (attachments != null && attachments.Count > 0)
+			{
+				DbFileRepository fsRepository = new DbFileRepository();
+				foreach (var att in attachments)
+				{
+					var filepath = att;
+
+					if (!filepath.StartsWith("/"))
+						filepath = "/" + filepath;
+
+					filepath = filepath.ToLowerInvariant();
+
+					if (filepath.StartsWith("/fs"))
+						filepath = filepath.Substring(3);
+
+					var file = fsRepository.Find(filepath);
+					if (file == null)
+						throw new Exception($"Attachment file '{filepath}' not found.");
+
+					email.Attachments.Add(filepath);
+				}
+			}
+			new SmtpInternalService().SaveEmail(email);
+		}
+
+		public void SendEmail(List<EmailAddress> recipients, string subject, string textBody, string htmlBody, List<string> attachments)
+		{
+			ValidationException ex = new ValidationException();
+
+			if (recipients == null || recipients.Count == 0)
+			{
+				ex.AddError("recipientEmail", "Recipient is not specified.");
+			}
+			else
+			{
+				foreach (var recipient in recipients)
+				{
+					if (recipient == null)
+						ex.AddError("recipientEmail", "Recipient is not specified.");
+					else
+					{
+						if (string.IsNullOrEmpty(recipient.Address))
+							ex.AddError("recipientEmail", "Recipient email is not specified.");
+						else if (!recipient.Address.IsEmail())
+							ex.AddError("recipientEmail", "Recipient email is not valid email address.");
+					}
+				}
+			}
+
+			if (string.IsNullOrEmpty(subject))
+				ex.AddError("subject", "Subject is required.");
+
+			ex.CheckAndThrow();
+
+			var message = new MimeMessage();
+			if (!string.IsNullOrWhiteSpace(DefaultSenderName))
+				message.From.Add(new MailboxAddress(DefaultSenderName, DefaultSenderEmail));
+			else
+				message.From.Add(new MailboxAddress(DefaultSenderEmail,DefaultSenderEmail));
+
+			foreach (var recipient in recipients)
+			{
+				if (!string.IsNullOrWhiteSpace(recipient.Name))
+					message.To.Add(new MailboxAddress(recipient.Name, recipient.Address));
+				else
+					message.To.Add(new MailboxAddress(recipient.Address,recipient.Address));
+			}
+
+			if (!string.IsNullOrWhiteSpace(DefaultReplyToEmail))
+				message.ReplyTo.Add(new MailboxAddress(DefaultReplyToEmail,DefaultReplyToEmail));
+
+			message.Subject = subject;
+
+			var bodyBuilder = new BodyBuilder();
+			bodyBuilder.HtmlBody = htmlBody;
+			bodyBuilder.TextBody = textBody;
+
+			if (attachments != null && attachments.Count > 0)
+			{
+				foreach (var att in attachments)
+				{
+					var filepath = att;
+
+					if (!filepath.StartsWith("/"))
+						filepath = "/" + filepath;
+
+					filepath = filepath.ToLowerInvariant();
+
+					if (filepath.StartsWith("/fs"))
+						filepath = filepath.Substring(3);
+
+					DbFileRepository fsRepository = new DbFileRepository();
+					var file = fsRepository.Find(filepath);
+					var bytes = file.GetBytes();
+
+					var extension = Path.GetExtension(filepath).ToLowerInvariant();
+					new FileExtensionContentTypeProvider().Mappings.TryGetValue(extension, out string mimeType);
+
+					var attachment = new MimePart(mimeType)
+					{
+						Content = new MimeContent(new MemoryStream(bytes)),
+						ContentDisposition = new ContentDisposition(ContentDisposition.Attachment),
+						ContentTransferEncoding = ContentEncoding.Base64,
+						FileName = Path.GetFileName(filepath)
+					};
+
+					bodyBuilder.Attachments.Add(attachment);
+				}
+			}
+
+			SmtpInternalService.ProcessHtmlContent(bodyBuilder);
+			message.Body = bodyBuilder.ToMessageBody();
+
+			using (var client = new SmtpClient())
+			{
+				//accept all SSL certificates (in case the server supports STARTTLS)
+				client.ServerCertificateValidationCallback = (s, c, h, e) =>
+				{
+					if (e == SslPolicyErrors.None)
+						return true;
+
+					Console.WriteLine("Certificate error: {0}", e);
+
+					// Do not allow this client to communicate with unauthenticated servers.
+					return false;
+				} ;
+
+				client.Connect(Server, Port, ConnectionSecurity);
+
+				if (!string.IsNullOrWhiteSpace(Username))
+					client.Authenticate(Username, Password);
+
+				client.Send(message);
+				client.Disconnect(true);
+			}
+
+			Email email = new Email();
+			email.Id = Guid.NewGuid();
+			email.Sender = new EmailAddress { Address = DefaultSenderEmail, Name = DefaultSenderName };
+			email.ReplyToEmail = DefaultReplyToEmail;
+			email.Recipients = recipients;
+			email.Subject = subject;
+			email.ContentHtml = htmlBody;
+			email.ContentText = textBody;
+			email.CreatedOn = DateTime.UtcNow;
+			email.SentOn = email.CreatedOn;
+			email.Priority = EmailPriority.Normal;
+			email.Status = EmailStatus.Sent;
+			email.ServerError = string.Empty;
+			email.ScheduledOn = null;
+			email.RetriesCount = 0;
+			email.ServiceId = Id;
+			if (attachments != null && attachments.Count > 0)
+			{
+				DbFileRepository fsRepository = new DbFileRepository();
+				foreach (var att in attachments)
+				{
+					var filepath = att;
+
+					if (!filepath.StartsWith("/"))
+						filepath = "/" + filepath;
+
+					filepath = filepath.ToLowerInvariant();
+
+					if (filepath.StartsWith("/fs"))
+						filepath = filepath.Substring(3);
+
+					var file = fsRepository.Find(filepath);
+					if (file == null)
+						throw new Exception($"Attachment file '{filepath}' not found.");
+
+					email.Attachments.Add(filepath);
+				}
+			}
+			new SmtpInternalService().SaveEmail(email);
+		}
+
+		public void SendEmail(EmailAddress recipient, EmailAddress sender, string subject, string textBody, string htmlBody, List<string> attachments)
+		{
+			ValidationException ex = new ValidationException();
+
+			if (recipient == null)
+				ex.AddError("recipientEmail", "Recipient is not specified.");
+			else
+			{
+				if (string.IsNullOrEmpty(recipient.Address))
+					ex.AddError("recipientEmail", "Recipient email is not specified.");
+				else if (!recipient.Address.IsEmail())
+					ex.AddError("recipientEmail", "Recipient email is not valid email address.");
+			}
+
+			if (string.IsNullOrEmpty(subject))
+				ex.AddError("subject", "Subject is required.");
+
+			ex.CheckAndThrow();
+
+			var message = new MimeMessage();
+			if (!string.IsNullOrWhiteSpace(sender.Name))
+				message.From.Add(new MailboxAddress(sender.Name, sender.Address));
+			else
+				message.From.Add(new MailboxAddress(sender.Address, sender.Address));
+
+			if (!string.IsNullOrWhiteSpace(recipient.Name))
+				message.To.Add(new MailboxAddress(recipient.Name, recipient.Address));
+			else
+				message.To.Add(new MailboxAddress(recipient.Address, recipient.Address));
+
+			if (!string.IsNullOrWhiteSpace(DefaultReplyToEmail))
+				message.ReplyTo.Add(new MailboxAddress(DefaultReplyToEmail, DefaultReplyToEmail));
+
+			message.Subject = subject;
+
+			var bodyBuilder = new BodyBuilder();
+			bodyBuilder.HtmlBody = htmlBody;
+			bodyBuilder.TextBody = textBody;
+
+			if (attachments != null && attachments.Count > 0)
+			{
+				foreach (var att in attachments)
+				{
+					var filepath = att;
+
+					if (!filepath.StartsWith("/"))
+						filepath = "/" + filepath;
+
+					filepath = filepath.ToLowerInvariant();
+
+					if (filepath.StartsWith("/fs"))
+						filepath = filepath.Substring(3);
+
+					DbFileRepository fsRepository = new DbFileRepository();
+					var file = fsRepository.Find(filepath);
+					var bytes = file.GetBytes();
+
+					var extension = Path.GetExtension(filepath).ToLowerInvariant();
+					new FileExtensionContentTypeProvider().Mappings.TryGetValue(extension, out string mimeType);
+
+					var attachment = new MimePart(mimeType)
+					{
+						Content = new MimeContent(new MemoryStream(bytes)),
+						ContentDisposition = new ContentDisposition(ContentDisposition.Attachment),
+						ContentTransferEncoding = ContentEncoding.Base64,
+						FileName = Path.GetFileName(filepath)
+					};
+
+					bodyBuilder.Attachments.Add(attachment);
+				}
+			}
+			SmtpInternalService.ProcessHtmlContent(bodyBuilder);
+			message.Body = bodyBuilder.ToMessageBody();
+
+			using (var client = new SmtpClient())
+			{
+				//accept all SSL certificates (in case the server supports STARTTLS)
+				client.ServerCertificateValidationCallback = (s, c, h, e) =>
+				{
+					if (e == SslPolicyErrors.None)
+						return true;
+
+					Console.WriteLine("Certificate error: {0}", e);
+
+					// Do not allow this client to communicate with unauthenticated servers.
+					return false;
+				} ;
+
+				client.Connect(Server, Port, ConnectionSecurity);
+
+				if (!string.IsNullOrWhiteSpace(Username))
+					client.Authenticate(Username, Password);
+
+				client.Send(message);
+				client.Disconnect(true);
+			}
+
+			Email email = new Email();
+			email.Id = Guid.NewGuid();
+			email.Sender = sender;
+			email.ReplyToEmail = DefaultReplyToEmail;
+			email.Recipients = new List<EmailAddress> { recipient };
+			email.Subject = subject;
+			email.ContentHtml = htmlBody;
+			email.ContentText = textBody;
+			email.CreatedOn = DateTime.UtcNow;
+			email.SentOn = email.CreatedOn;
+			email.Priority = EmailPriority.Normal;
+			email.Status = EmailStatus.Sent;
+			email.ServerError = string.Empty;
+			email.ScheduledOn = null;
+			email.RetriesCount = 0;
+			email.ServiceId = Id;
+			if (attachments != null && attachments.Count > 0)
+			{
+				DbFileRepository fsRepository = new DbFileRepository();
+				foreach (var att in attachments)
+				{
+					var filepath = att;
+
+					if (!filepath.StartsWith("/"))
+						filepath = "/" + filepath;
+
+					filepath = filepath.ToLowerInvariant();
+
+					if (filepath.StartsWith("/fs"))
+						filepath = filepath.Substring(3);
+
+					var file = fsRepository.Find(filepath);
+					if (file == null)
+						throw new Exception($"Attachment file '{filepath}' not found.");
+
+					email.Attachments.Add(filepath);
+				}
+			}
+			new SmtpInternalService().SaveEmail(email);
+		}
+
+		public void SendEmail(List<EmailAddress> recipients, EmailAddress sender, string subject, string textBody, string htmlBody, List<string> attachments)
+		{
+			ValidationException ex = new ValidationException();
+
+			if (recipients == null || recipients.Count == 0)
+			{
+				ex.AddError("recipientEmail", "Recipient is not specified.");
+			}
+			else
+			{
+				foreach (var recipient in recipients)
+				{
+					if (recipient == null)
+						ex.AddError("recipientEmail", "Recipient is not specified.");
+					else
+					{
+						if (string.IsNullOrEmpty(recipient.Address))
+							ex.AddError("recipientEmail", "Recipient email is not specified.");
+						else if (!recipient.Address.IsEmail())
+							ex.AddError("recipientEmail", "Recipient email is not valid email address.");
+					}
+				}
+			}
+
+			if (string.IsNullOrEmpty(subject))
+				ex.AddError("subject", "Subject is required.");
+
+			ex.CheckAndThrow();
+
+			var message = new MimeMessage();
+			if (!string.IsNullOrWhiteSpace(sender.Name))
+				message.From.Add(new MailboxAddress(sender.Name, sender.Address));
+			else
+				message.From.Add(new MailboxAddress(sender.Address, sender.Address));
+
+			foreach (var recipient in recipients)
+			{
+				if (!string.IsNullOrWhiteSpace(recipient.Name))
+					message.To.Add(new MailboxAddress(recipient.Name, recipient.Address));
+				else
+					message.To.Add(new MailboxAddress(recipient.Address, recipient.Address));
+			}
+
+			if (!string.IsNullOrWhiteSpace(DefaultReplyToEmail))
+				message.ReplyTo.Add(new MailboxAddress(DefaultReplyToEmail, DefaultReplyToEmail));
+
+			message.Subject = subject;
+
+			var bodyBuilder = new BodyBuilder();
+			bodyBuilder.HtmlBody = htmlBody;
+			bodyBuilder.TextBody = textBody;
+
+			if (attachments != null && attachments.Count > 0)
+			{
+				foreach (var att in attachments)
+				{
+					var filepath = att;
+
+					if (!filepath.StartsWith("/"))
+						filepath = "/" + filepath;
+
+					filepath = filepath.ToLowerInvariant();
+
+					if (filepath.StartsWith("/fs"))
+						filepath = filepath.Substring(3);
+
+					DbFileRepository fsRepository = new DbFileRepository();
+					var file = fsRepository.Find(filepath);
+					var bytes = file.GetBytes();
+
+					var extension = Path.GetExtension(filepath).ToLowerInvariant();
+					new FileExtensionContentTypeProvider().Mappings.TryGetValue(extension, out string mimeType);
+
+					var attachment = new MimePart(mimeType)
+					{
+						Content = new MimeContent(new MemoryStream(bytes)),
+						ContentDisposition = new ContentDisposition(ContentDisposition.Attachment),
+						ContentTransferEncoding = ContentEncoding.Base64,
+						FileName = Path.GetFileName(filepath)
+					};
+
+					bodyBuilder.Attachments.Add(attachment);
+				}
+			}
+			SmtpInternalService.ProcessHtmlContent(bodyBuilder);
+			message.Body = bodyBuilder.ToMessageBody();
+
+			using (var client = new SmtpClient())
+			{
+				//accept all SSL certificates (in case the server supports STARTTLS)
+				client.ServerCertificateValidationCallback = (s, c, h, e) =>
+				{
+					if (e == SslPolicyErrors.None)
+						return true;
+
+					Console.WriteLine("Certificate error: {0}", e);
+
+					// Do not allow this client to communicate with unauthenticated servers.
+					return false;
+				} ;
+
+				client.Connect(Server, Port, ConnectionSecurity);
+
+				if (!string.IsNullOrWhiteSpace(Username))
+					client.Authenticate(Username, Password);
+
+				client.Send(message);
+				client.Disconnect(true);
+			}
+
+			Email email = new Email();
+			email.Id = Guid.NewGuid();
+			email.Sender = sender;
+			email.ReplyToEmail = DefaultReplyToEmail;
+			email.Recipients = recipients;
+			email.Subject = subject;
+			email.ContentHtml = htmlBody;
+			email.ContentText = textBody;
+			email.CreatedOn = DateTime.UtcNow;
+			email.SentOn = email.CreatedOn;
+			email.Priority = EmailPriority.Normal;
+			email.Status = EmailStatus.Sent;
+			email.ServerError = string.Empty;
+			email.ScheduledOn = null;
+			email.RetriesCount = 0;
+			email.ServiceId = Id;
+			email.Attachments = new List<string>();
+			if (attachments != null && attachments.Count > 0)
+			{
+				DbFileRepository fsRepository = new DbFileRepository();
+				foreach (var att in attachments)
+				{
+					var filepath = att;
+
+					if (!filepath.StartsWith("/"))
+						filepath = "/" + filepath;
+
+					filepath = filepath.ToLowerInvariant();
+
+					if (filepath.StartsWith("/fs"))
+						filepath = filepath.Substring(3);
+
+					var file = fsRepository.Find(filepath);
+					if (file == null)
+						throw new Exception($"Attachment file '{filepath}' not found.");
+
+					email.Attachments.Add(filepath);
+				}
+			}
+
+			
+
+			new SmtpInternalService().SaveEmail(email);
+		}
+
+		public void QueueEmail(EmailAddress recipient, string subject, string textBody, string htmlBody, EmailPriority priority = EmailPriority.Normal, List<string> attachments = null)
+		{
+			ValidationException ex = new ValidationException();
+
+			if (recipient == null)
+				ex.AddError("recipientEmail", "Recipient is not specified.");
+			else
+			{
+				var address = recipient.Address;
+				if (address.StartsWith("cc:"))
+					address = address.Substring(3);
+
+				if (address.StartsWith("bcc:"))
+					address = address.Substring(4);
+
+				if (string.IsNullOrEmpty(address))
+					ex.AddError("recipientEmail", "Recipient email is not specified.");
+				else if (!address.IsEmail())
+					ex.AddError("recipientEmail", "Recipient email is not valid email address.");
+			}
+
+			if (string.IsNullOrEmpty(subject))
+				ex.AddError("subject", "Subject is required.");
+
+			ex.CheckAndThrow();
+
+			Email email = new Email();
+			email.Id = Guid.NewGuid();
+			email.Sender = new EmailAddress { Address = DefaultSenderEmail, Name = DefaultSenderName };
+			email.ReplyToEmail = DefaultReplyToEmail;
+			email.Recipients = new List<EmailAddress> { recipient };
+			email.Subject = subject;
+			email.ContentHtml = htmlBody;
+			email.ContentText = textBody;
+			email.CreatedOn = DateTime.UtcNow;
+			email.SentOn = null;
+			email.Priority = priority;
+			email.Status = EmailStatus.Pending;
+			email.ServerError = string.Empty;
+			email.ScheduledOn = email.CreatedOn;
+			email.RetriesCount = 0;
+			email.ServiceId = Id;
+
+			email.Attachments = new List<string>();
+			if (attachments != null && attachments.Count > 0)
+			{
+				DbFileRepository fsRepository = new DbFileRepository();
+				foreach (var att in attachments)
+				{
+					var filepath = att;
+
+					if (!filepath.StartsWith("/"))
+						filepath = "/" + filepath;
+
+					filepath = filepath.ToLowerInvariant();
+
+					if (filepath.StartsWith("/fs"))
+						filepath = filepath.Substring(3);
+
+					var file = fsRepository.Find(filepath);
+					if (file == null)
+						throw new Exception($"Attachment file '{filepath}' not found.");
+
+					email.Attachments.Add(filepath);
+				}
+			}
+
+			new SmtpInternalService().SaveEmail(email);
+		}
+
+		public void QueueEmail(List<EmailAddress> recipients, string subject, string textBody, string htmlBody, EmailPriority priority = EmailPriority.Normal, List<string> attachments = null)
+		{
+			ValidationException ex = new ValidationException();
+
+			if (recipients == null || recipients.Count == 0)
+			{
+				ex.AddError("recipientEmail", "Recipient is not specified.");
+			}
+			else
+			{
+				foreach (var recipient in recipients)
+				{
+					if (recipient == null)
+						ex.AddError("recipientEmail", "Recipient is not specified.");
+					else
+					{
+						var address = recipient.Address;
+						if (address.StartsWith("cc:"))
+							address = address.Substring(3);
+
+						if (address.StartsWith("bcc:"))
+							address = address.Substring(4);
+
+						if (string.IsNullOrEmpty(address))
+							ex.AddError("recipientEmail", "Recipient email is not specified.");
+						else if (!address.IsEmail())
+							ex.AddError("recipientEmail", "Recipient email is not valid email address.");
+					}
+				}
+			}
+
+			if (string.IsNullOrEmpty(subject))
+				ex.AddError("subject", "Subject is required.");
+
+			ex.CheckAndThrow();
+
+			Email email = new Email();
+			email.Id = Guid.NewGuid();
+			email.Sender = new EmailAddress { Address = DefaultSenderEmail, Name = DefaultSenderName };
+			email.ReplyToEmail = DefaultReplyToEmail;
+			email.Recipients = recipients;
+			email.Subject = subject;
+			email.ContentHtml = htmlBody;
+			email.ContentText = textBody;
+			email.CreatedOn = DateTime.UtcNow;
+			email.SentOn = null;
+			email.Priority = priority;
+			email.Status = EmailStatus.Pending;
+			email.ServerError = string.Empty;
+			email.ScheduledOn = email.CreatedOn;
+			email.RetriesCount = 0;
+			email.ServiceId = Id;
+
+			email.Attachments = new List<string>();
+			if (attachments != null && attachments.Count > 0)
+			{
+				DbFileRepository fsRepository = new DbFileRepository();
+				foreach (var att in attachments)
+				{
+					var filepath = att;
+
+					if (!filepath.StartsWith("/"))
+						filepath = "/" + filepath;
+
+					filepath = filepath.ToLowerInvariant();
+
+					if (filepath.StartsWith("/fs"))
+						filepath = filepath.Substring(3);
+
+					var file = fsRepository.Find(filepath);
+					if (file == null)
+						throw new Exception($"Attachment file '{filepath}' not found.");
+
+					email.Attachments.Add(filepath);
+				}
+			}
+
+			new SmtpInternalService().SaveEmail(email);
+		}
+
+		public void QueueEmail(EmailAddress recipient, EmailAddress sender, string subject, string textBody, string htmlBody, EmailPriority priority = EmailPriority.Normal, List<string> attachments = null)
+		{
+			QueueEmail(recipient, sender, null, subject, textBody, htmlBody, priority, attachments);
+		}
+
+		public void QueueEmail(List<EmailAddress> recipients, EmailAddress sender, string subject, string textBody, string htmlBody, EmailPriority priority = EmailPriority.Normal, List<string> attachments = null)
+		{
+			QueueEmail(recipients, sender, null, subject, textBody, htmlBody, priority, attachments);
+		}
+
+		public void QueueEmail(EmailAddress recipient, EmailAddress sender, string replyTo, string subject, string textBody, string htmlBody, EmailPriority priority = EmailPriority.Normal, List<string> attachments = null )
+		{
+			ValidationException ex = new ValidationException();
+
+			if (recipient == null)
+				ex.AddError("recipientEmail", "Recipient is not specified.");
+			else
+			{
+				var address = recipient.Address;
+				if (address.StartsWith("cc:"))
+					address = address.Substring(3);
+				if (address.StartsWith("bcc:"))
+					address = address.Substring(4);
+				if (string.IsNullOrEmpty(address))
+					ex.AddError("recipientEmail", "Recipient email is not specified.");
+				else if (!address.IsEmail())
+					ex.AddError("recipientEmail", "Recipient email is not valid email address.");
+			}
+
+			if (!string.IsNullOrWhiteSpace(replyTo))
+			{
+				string[] replyToEmails = replyTo.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+				foreach (var replyEmail in replyToEmails)
+				{
+					if (!replyEmail.IsEmail())
+						ex.AddError("recipientEmail", "Reply To email is not valid email address.");
+				}
+			}
+
+			if (string.IsNullOrEmpty(subject))
+				ex.AddError("subject", "Subject is required.");
+
+			ex.CheckAndThrow();
+
+			Email email = new Email();
+			email.Id = Guid.NewGuid();
+			email.Sender = sender ?? new EmailAddress { Address = DefaultSenderEmail, Name = DefaultSenderName };
+			if (string.IsNullOrWhiteSpace(replyTo))
+				email.ReplyToEmail = DefaultReplyToEmail;
+			else
+				email.ReplyToEmail = replyTo;
+			email.Recipients = new List<EmailAddress> { recipient };
+			email.Subject = subject;
+			email.ContentHtml = htmlBody;
+			email.ContentText = textBody;
+			email.CreatedOn = DateTime.UtcNow;
+			email.SentOn = null;
+			email.Priority = priority;
+			email.Status = EmailStatus.Pending;
+			email.ServerError = string.Empty;
+			email.ScheduledOn = email.CreatedOn;
+			email.RetriesCount = 0;
+			email.ServiceId = Id;
+
+			email.Attachments = new List<string>();
+			if (attachments != null && attachments.Count > 0)
+			{
+				DbFileRepository fsRepository = new DbFileRepository();
+				foreach (var att in attachments)
+				{
+					var filepath = att;
+
+					if (!filepath.StartsWith("/"))
+						filepath = "/" + filepath;
+
+					filepath = filepath.ToLowerInvariant();
+
+					if (filepath.StartsWith("/fs"))
+						filepath = filepath.Substring(3);
+
+					var file = fsRepository.Find(filepath);
+					if (file == null)
+						throw new Exception($"Attachment file '{filepath}' not found.");
+
+					email.Attachments.Add(filepath);
+				}
+			}
+
+			new SmtpInternalService().SaveEmail(email);
+		}
+
+		public void QueueEmail(List<EmailAddress> recipients, EmailAddress sender, string replyTo, string subject, string textBody, string htmlBody, EmailPriority priority = EmailPriority.Normal, List<string> attachments = null)
+		{
+			ValidationException ex = new ValidationException();
+
+			if (recipients == null || recipients.Count == 0)
+			{
+				ex.AddError("recipientEmail", "Recipient is not specified.");
+			}
+			else
+			{
+				foreach (var recipient in recipients)
+				{
+					if (recipient == null)
+						ex.AddError("recipientEmail", "Recipient is not specified.");
+					else
+					{
+						var address = recipient.Address;
+						if (address.StartsWith("cc:"))
+							address = address.Substring(3);
+						if (address.StartsWith("bcc:"))
+							address = address.Substring(4);
+						if (string.IsNullOrEmpty(address))
+							ex.AddError("recipientEmail", "Recipient email is not specified.");
+						else if (!address.IsEmail())
+							ex.AddError("recipientEmail", "Recipient email is not valid email address.");
+					}
+				}
+			}
+
+			if (!string.IsNullOrWhiteSpace(replyTo))
+			{
+				string[] replyToEmails = replyTo.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+				foreach (var replyEmail in replyToEmails)
+				{
+					if (!replyEmail.IsEmail())
+						ex.AddError("recipientEmail", "Reply To email is not valid email address.");
+				}
+			}
+
+			if (string.IsNullOrEmpty(subject))
+				ex.AddError("subject", "Subject is required.");
+
+			ex.CheckAndThrow();
+
+			Email email = new Email();
+			email.Id = Guid.NewGuid();
+			email.Sender = sender ?? new EmailAddress { Address = DefaultSenderEmail, Name = DefaultSenderName };
+			if (string.IsNullOrWhiteSpace(replyTo))
+				email.ReplyToEmail = DefaultReplyToEmail;
+			else
+				email.ReplyToEmail = replyTo;
+			email.Recipients = recipients;
+			email.Subject = subject;
+			email.ContentHtml = htmlBody;
+			email.ContentText = textBody;
+			email.CreatedOn = DateTime.UtcNow;
+			email.SentOn = null;
+			email.Priority = priority;
+			email.Status = EmailStatus.Pending;
+			email.ServerError = string.Empty;
+			email.ScheduledOn = email.CreatedOn;
+			email.RetriesCount = 0;
+			email.ServiceId = Id;
+
+			email.Attachments = new List<string>();
+			if (attachments != null && attachments.Count > 0)
+			{
+				DbFileRepository fsRepository = new DbFileRepository();
+				foreach (var att in attachments)
+				{
+					var filepath = att;
+
+					if (!filepath.StartsWith("/"))
+						filepath = "/" + filepath;
+
+					filepath = filepath.ToLowerInvariant();
+
+					if (filepath.StartsWith("/fs"))
+						filepath = filepath.Substring(3);
+
+					var file = fsRepository.Find(filepath);
+					if (file == null)
+						throw new Exception($"Attachment file '{filepath}' not found.");
+
+					email.Attachments.Add(filepath);
+				}
+			}
+
+			new SmtpInternalService().SaveEmail(email);
+		}
+	}
+}
+>>>>>>> S4830
