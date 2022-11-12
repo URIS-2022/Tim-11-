@@ -1163,7 +1163,7 @@ namespace WebVella.Erp.Plugins.Mail
 				var system = false;
 				var layout = @"";
 				var weight = 10;
-				var type = (PageType)((int)3);
+				var type = (PageType)(3);
 				var isRazorBody = false;
 				Guid? appId = new Guid("9d3b5497-e136-43b7-ad87-857e615a54c9");
 				Guid? entityId = new Guid("17698b9f-e533-4f8d-a651-a00f7de2989e");
