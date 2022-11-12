@@ -91,20 +91,20 @@ namespace WebVella.Erp.Plugins.Mail.Api
 			{
 				var result = new EqlCommand("SELECT * FROM smtp_service WHERE is_default = @is_default", new EqlParameter("is_default", true)).Execute();
 				if (result.Count == 0)
-					throw new Exception($"Default SmtpService not found.");
+					throw new Exception("Default SmtpService not found.");
 				else if (result.Count > 1)
-					throw new Exception($"More than one default SmtpService not found.");
+					throw new Exception("More than one default SmtpService not found.");
 
 				smtpServiceRec = result[0];
 			}
 			return smtpServiceRec.MapTo<SmtpService>();
 		}
 
-		internal SmtpService GetSmtpServiceInternal(Guid id)
+		static SmtpService GetSmtpServiceInternal(Guid id)
 		{
 			var result = new EqlCommand("SELECT * FROM smtp_service WHERE id = @id", new EqlParameter("id", id)).Execute();
 			if (result.Count == 0)
-				throw new Exception($"SmtpService with id = '{id}' not found.");
+				throw new Exception("SmtpService with that id  not found.");
 
 			return result[0].MapTo<SmtpService>();
 		}
