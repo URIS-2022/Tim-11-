@@ -17,8 +17,12 @@ namespace WebVella.Erp.Plugins.Crm
 			using (SecurityContext.OpenSystemScope())
 			{
 
+<<<<<<< HEAD
 				
 				var relMan = new EntityRelationManager();
+=======
+				var entMan = new EntityManager();
+>>>>>>> c1
 				var storeSystemSettings = DbContext.Current.SettingsRepository.Read();
 				var systemSettings = new SystemSettings(storeSystemSettings);
 

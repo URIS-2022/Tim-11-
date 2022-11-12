@@ -124,7 +124,7 @@ namespace WebVella.Erp.ConsoleApp
 							newRec["name"] = "New changed Role";
 							result = recMan.UpdateRecord("role", newRec);
 							if (!result.Success)
-								throw new Exception(result.Message);
+								throw new ArgumentException(result.Message);
 
 							Console.WriteLine($"=== roles after update ===");
 							existingRoles = new EqlCommand("SELECT * FROM role").Execute();
@@ -133,7 +133,7 @@ namespace WebVella.Erp.ConsoleApp
 
 							result = recMan.DeleteRecord("role", (Guid)newRec["id"]);
 							if (!result.Success)
-								throw new Exception(result.Message);
+								throw new ArgumentException(result.Message);
 
 							Console.WriteLine($"=== roles after delete ===");
 							existingRoles = new EqlCommand("SELECT * FROM role").Execute();

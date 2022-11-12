@@ -106,7 +106,7 @@ namespace WebVella.Erp.Web.Repositories
 					"UPDATE public.app_sitemap_area_group " +
 					"SET name = @name, area_id = @area_id, label = @label, label_translations = @label_translations, " +
 					"weight = @weight, render_roles = @render_roles" +
-					"WHERE id = @id");
+					" WHERE id = @id");
 
 			command.Parameters.Add(new NpgsqlParameter("@id", id));
 			command.Parameters.Add(new NpgsqlParameter("@area_id", areaId));
