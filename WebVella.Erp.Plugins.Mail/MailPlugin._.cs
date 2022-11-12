@@ -101,7 +101,7 @@ namespace WebVella.Erp.Plugins.Mail
 								try
 								{
 									currentPluginSettings.Version = patchVersion;
-									Patch20190420(entMan, relMan, recMan);
+									Patch20190420(entMan);
 								}
 								catch (ValidationException ex)
 								{
