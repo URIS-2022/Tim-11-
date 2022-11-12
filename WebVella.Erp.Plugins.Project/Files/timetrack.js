@@ -3,16 +3,16 @@
 	function RunTimer(wvTimerEl) {
 		var recordRow = $(wvTimerEl).closest("tr");
 		recordRow.addClass("go-bkg-orange-light");
-		var timerTd = $(wvTimerEl).closest('.timer-td');
-		var alreadyLoggedSecondsEl = timerTd.find("input[name='timelog_total_seconds']");
-		var alreadyLoggedSeconds = 0;
+		const timerTd = $(wvTimerEl).closest('.timer-td');
+		const alreadyLoggedSecondsEl = timerTd.find("input[name='timelog_total_seconds']");
+		const alreadyLoggedSeconds = 0;
 		if (alreadyLoggedSecondsEl && alreadyLoggedSecondsEl.val()) {
 			alreadyLoggedSeconds = alreadyLoggedSecondsEl.val();
 		}
-		var logStartFormInputEl = timerTd.find("input[name='timelog_started_on']");
-		var logstartDate = $(logStartFormInputEl).val();
-		var totalLoggedSeconds = moment().utc().diff(moment(logstartDate), 'seconds');
-		var totalLoggedSecondsDec = new Decimal(totalLoggedSeconds).add(new Decimal(alreadyLoggedSeconds));		
+		const logStartFormInputEl = timerTd.find("input[name='timelog_started_on']");
+		const logstartDate = $(logStartFormInputEl).val();
+		const totalLoggedSeconds = moment().utc().diff(moment(logstartDate), 'seconds');
+		const totalLoggedSecondsDec = new Decimal(totalLoggedSeconds).add(new Decimal(alreadyLoggedSeconds));		
 		var loggedHours = totalLoggedSecondsDec.div(3600).toDecimalPlaces(0,Decimal.ROUND_DOWN);
 		var totalLeft = totalLoggedSecondsDec.minus(loggedHours.times(3600));
 		var loggedMinutes = totalLeft.div(60).toDecimalPlaces(0,Decimal.ROUND_DOWN);
