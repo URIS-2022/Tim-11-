@@ -11,6 +11,8 @@ using HtmlAgilityPack;
 using System.IO;
 using WebVella.Erp.Database;
 using Microsoft.AspNetCore.StaticFiles;
+using System.Net.Security;
+using System.Net;
 
 namespace WebVella.Erp.Plugins.Mail.Api
 {
@@ -142,7 +144,16 @@ namespace WebVella.Erp.Plugins.Mail.Api
 			using (var client = new SmtpClient())
 			{
 				//accept all SSL certificates (in case the server supports STARTTLS)
-				client.ServerCertificateValidationCallback = (s, c, h, e) => true;
+				client.ServerCertificateValidationCallback = (s, c, h, e) =>
+				{
+                    if (e == SslPolicyErrors.None)
+                        return true;
+
+                    Console.WriteLine("Certificate error: {0}", e);
+
+                    // Do not allow this client to communicate with unauthenticated servers.
+                    return false;
+                } ;
 
 				client.Connect(Server, Port, ConnectionSecurity);
 
@@ -285,7 +296,16 @@ namespace WebVella.Erp.Plugins.Mail.Api
 			using (var client = new SmtpClient())
 			{
 				//accept all SSL certificates (in case the server supports STARTTLS)
-				client.ServerCertificateValidationCallback = (s, c, h, e) => true;
+				client.ServerCertificateValidationCallback = (s, c, h, e) =>
+				{
+					if (e == SslPolicyErrors.None)
+						return true;
+
+					Console.WriteLine("Certificate error: {0}", e);
+
+					// Do not allow this client to communicate with unauthenticated servers.
+					return false;
+				} ;
 
 				client.Connect(Server, Port, ConnectionSecurity);
 
@@ -414,7 +434,16 @@ namespace WebVella.Erp.Plugins.Mail.Api
 			using (var client = new SmtpClient())
 			{
 				//accept all SSL certificates (in case the server supports STARTTLS)
-				client.ServerCertificateValidationCallback = (s, c, h, e) => true;
+				client.ServerCertificateValidationCallback = (s, c, h, e) =>
+				{
+					if (e == SslPolicyErrors.None)
+						return true;
+
+					Console.WriteLine("Certificate error: {0}", e);
+
+					// Do not allow this client to communicate with unauthenticated servers.
+					return false;
+				} ;
 
 				client.Connect(Server, Port, ConnectionSecurity);
 
@@ -556,7 +585,16 @@ namespace WebVella.Erp.Plugins.Mail.Api
 			using (var client = new SmtpClient())
 			{
 				//accept all SSL certificates (in case the server supports STARTTLS)
-				client.ServerCertificateValidationCallback = (s, c, h, e) => true;
+				client.ServerCertificateValidationCallback = (s, c, h, e) =>
+				{
+					if (e == SslPolicyErrors.None)
+						return true;
+
+					Console.WriteLine("Certificate error: {0}", e);
+
+					// Do not allow this client to communicate with unauthenticated servers.
+					return false;
+				} ;
 
 				client.Connect(Server, Port, ConnectionSecurity);
 
