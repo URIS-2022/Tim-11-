@@ -13,44 +13,63 @@ using WebVella.Erp.Database;
 using Microsoft.AspNetCore.StaticFiles;
 using System.Net.Security;
 using System.Net;
+
 namespace WebVella.Erp.Plugins.Mail.Api
 {
     public class SmtpService
     {
         #region <--- Properties --->
+
         [JsonProperty(PropertyName = "id")]
         public Guid Id { get; internal set; }
+
         [JsonProperty(PropertyName = "name")]
         public string Name { get; internal set; }
+
         [JsonProperty(PropertyName = "server")]
         public string Server { get; internal set; }
+
         [JsonProperty(PropertyName = "port")]
         public int Port { get; internal set; }
+
         [JsonProperty(PropertyName = "username")]
         public string Username { get; internal set; }
+
         [JsonProperty(PropertyName = "password")]
         public string Password { get; internal set; }
+
         [JsonProperty(PropertyName = "default_sender_name")]
         public string DefaultSenderName { get; internal set; }
+
         [JsonProperty(PropertyName = "default_sender_email")]
         public string DefaultSenderEmail { get; internal set; }
+
         [JsonProperty(PropertyName = "default_reply_to_email")]
         public string DefaultReplyToEmail { get; internal set; }
+
         [JsonProperty(PropertyName = "max_retries_count")]
         public int MaxRetriesCount { get; internal set; }
+
         [JsonProperty(PropertyName = "retry_wait_minutes")]
         public int RetryWaitMinutes { get; internal set; }
+
         [JsonProperty(PropertyName = "is_default")]
         public bool IsDefault { get; internal set; }
+
         [JsonProperty(PropertyName = "is_enabled")]
         public bool IsEnabled { get; internal set; }
+
         [JsonProperty(PropertyName = "connection_security")]
         public SecureSocketOptions ConnectionSecurity { get; internal set; }
+
         #endregion
+
         internal SmtpService() { }
+
         public void SendEmail(EmailAddress recipient, string subject, string textBody, string htmlBody, List<string> attachments)
         {
             ValidationException ex = new ValidationException();
+
             if (recipient == null)
                 ex.AddError("recipientEmail", "Recipient is not specified.");
             else
@@ -60,39 +79,53 @@ namespace WebVella.Erp.Plugins.Mail.Api
                 else if (!recipient.Address.IsEmail())
                     ex.AddError("recipientEmail", "Recipient email is not valid email address.");
             }
+
             if (string.IsNullOrEmpty(subject))
                 ex.AddError("subject", "Subject is required.");
+
             ex.CheckAndThrow();
+
             var message = new MimeMessage();
             if (!string.IsNullOrWhiteSpace(DefaultSenderName))
                 message.From.Add(new MailboxAddress(DefaultSenderName, DefaultSenderEmail));
             else
                 message.From.Add(new MailboxAddress(DefaultSenderEmail, DefaultSenderEmail));
+
             if (!string.IsNullOrWhiteSpace(recipient.Name))
                 message.To.Add(new MailboxAddress(recipient.Name, recipient.Address));
             else
                 message.To.Add(new MailboxAddress(recipient.Address, recipient.Address));
+
             if (!string.IsNullOrWhiteSpace(DefaultReplyToEmail))
                 message.ReplyTo.Add(new MailboxAddress(DefaultReplyToEmail, DefaultReplyToEmail));
+
             message.Subject = subject;
+
             var bodyBuilder = new BodyBuilder();
             bodyBuilder.HtmlBody = htmlBody;
             bodyBuilder.TextBody = textBody;
+
             if (attachments != null && attachments.Count > 0)
             {
                 foreach (var att in attachments)
                 {
                     var filepath = att;
+
                     if (!filepath.StartsWith("/"))
                         filepath = "/" + filepath;
+
                     filepath = filepath.ToLowerInvariant();
+
                     if (filepath.StartsWith("/fs"))
                         filepath = filepath.Substring(3);
+
                     DbFileRepository fsRepository = new DbFileRepository();
                     var file = fsRepository.Find(filepath);
                     var bytes = file.GetBytes();
+
                     var extension = Path.GetExtension(filepath).ToLowerInvariant();
                     new FileExtensionContentTypeProvider().Mappings.TryGetValue(extension, out string mimeType);
+
                     var attachment = new MimePart(mimeType)
                     {
                         Content = new MimeContent(new MemoryStream(bytes)),
@@ -100,11 +133,14 @@ namespace WebVella.Erp.Plugins.Mail.Api
                         ContentTransferEncoding = ContentEncoding.Base64,
                         FileName = Path.GetFileName(filepath)
                     };
+
                     bodyBuilder.Attachments.Add(attachment);
                 }
             }
+
             SmtpInternalService.ProcessHtmlContent(bodyBuilder);
             message.Body = bodyBuilder.ToMessageBody();
+
             using (var client = new SmtpClient())
             {
                 //accept all SSL certificates (in case the server supports STARTTLS)
@@ -112,16 +148,22 @@ namespace WebVella.Erp.Plugins.Mail.Api
                 {
                     if (e == SslPolicyErrors.None)
                         return true;
+
                     Console.WriteLine("Certificate error: {0}", e);
+
                     // Do not allow this client to communicate with unauthenticated servers.
                     return false;
                 };
+
                 client.Connect(Server, Port, ConnectionSecurity);
+
                 if (!string.IsNullOrWhiteSpace(Username))
                     client.Authenticate(Username, Password);
+
                 client.Send(message);
                 client.Disconnect(true);
             }
+
             Email email = new Email();
             email.Id = Guid.NewGuid();
             email.Sender = new EmailAddress { Address = DefaultSenderEmail, Name = DefaultSenderName };
@@ -144,11 +186,15 @@ namespace WebVella.Erp.Plugins.Mail.Api
                 foreach (var att in attachments)
                 {
                     var filepath = att;
+
                     if (!filepath.StartsWith("/"))
                         filepath = "/" + filepath;
+
                     filepath = filepath.ToLowerInvariant();
                     if (filepath.StartsWith("/fs"))
                         filepath = filepath.Substring(3);
+
+
                     var file = fsRepository.Find(filepath);
                     if (file == null)
                         throw new Exception($"Attachment file '{filepath}' not found.");
