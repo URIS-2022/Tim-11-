@@ -2,6 +2,7 @@
 using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using MimeKit;
 using MimeKit.Utils;
 using System;
@@ -170,7 +171,7 @@ namespace WebVella.Erp.Plugins.Mail.Services
 
 							try
 							{
-								var secOptions = (MailKit.Security.SecureSocketOptions)connectionSecurityNumber;
+								//continue
 							}
 							catch
 							{
@@ -336,8 +337,9 @@ namespace WebVella.Erp.Plugins.Mail.Services
 
 							try
 							{
-								var secOptions = (MailKit.Security.SecureSocketOptions)connectionSecurityNumber;
+								//continue
 							}
+
 							catch
 							{
 								errors.Add(new ErrorModel
@@ -355,7 +357,7 @@ namespace WebVella.Erp.Plugins.Mail.Services
 
 		public void HandleDefaultServiceSetup(EntityRecord rec, List<ErrorModel> errors)
 		{
-			if (rec.Properties.ContainsKey("is_default") && (bool)rec["is_default"])
+			if (rec.Properties.ContainsKey("is_default") && (bool)rec["is_default"]==true)
 			{
 
 				var recMan = new RecordManager(executeHooks: false);
@@ -369,7 +371,7 @@ namespace WebVella.Erp.Plugins.Mail.Services
 					}
 				}
 			}
-			else if (rec.Properties.ContainsKey("is_default") && (bool)rec["is_default"] == false)
+			else if (rec.Properties.ContainsKey("is_default") && (bool)rec["is_default"])
 			{
 				var currentRecord = new EqlCommand("SELECT * FROM smtp_service WHERE id = @id", new EqlParameter("id", rec["id"])).Execute();
 				if (currentRecord.Count > 0 && (bool)currentRecord[0]["is_default"])
@@ -508,7 +510,7 @@ namespace WebVella.Erp.Plugins.Mail.Services
 				response = recMan.CreateRecord("email", email.MapTo<EntityRecord>());
 
 			if (!response.Success)
-				throw new Exception(response.Message);
+				throw new ArgumentNullException(response.Message);
 			
 		}
 
@@ -575,9 +577,10 @@ namespace WebVella.Erp.Plugins.Mail.Services
 				if (string.IsNullOrWhiteSpace(builder.TextBody) && !string.IsNullOrWhiteSpace(builder.HtmlBody))
 					builder.TextBody = ConvertToPlainText(builder.HtmlBody);
 			}
-			catch
+
+			finally
 			{
-				return;
+				//finally block
 			}
 		}
 
@@ -857,7 +860,7 @@ namespace WebVella.Erp.Plugins.Mail.Services
 							email.ServerError = "SMTP service not found.";
 							email.ScheduledOn = null;
 							SaveEmail(email);
-							continue;
+
 						}
 						else
 						{
