@@ -2,6 +2,7 @@
 using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using MimeKit;
 using MimeKit.Utils;
 using System;
@@ -579,7 +580,7 @@ namespace WebVella.Erp.Plugins.Mail.Services
 
 			finally
 			{
-
+				//finally block
 			}
 		}
 
