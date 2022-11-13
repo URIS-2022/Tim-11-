@@ -1,38 +1,21 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 using WebVella.Erp.Api;
 using WebVella.Erp.Api.Models;
 using WebVella.Erp.Eql;
 
 namespace WebVella.Erp.Plugins.Next
 {
-<<<<<<< HEAD
-	public partial class NextPlugin : ErpPlugin
-	{
-		private static void Patch20190206(EntityManager entMan, EntityRelationManager relMan, RecordManager recMan)
-		{
-            DeleteRelationSolutation1nContact();
-			
-=======
     public partial class NextPlugin : ErpPlugin
     {
         private static void Patch20190206(EntityManager entMan, EntityRelationManager relMan, RecordManager recMan)
         {
+
+
             DeleteRelationSolutation1nContact(relMan);
             DeleteRelationSolutation1nAccount(relMan);
->>>>>>> Milan Goranović - Updated
-
-            #region << ***Delete relation*** Relation name: solutation_1n_account >>
-            {
-                {
-                    var response = relMan.Delete(new Guid("66f62cd6-174c-4a0b-b56f-6356b24bd73d"));
-                    if (!response.Success)
-                        throw new Exception("System error 10060. Relation: solutation_1n_account Delete. Message:" + response.Message);
-                }
-            }
-            #endregion
 
             #region << ***Delete field*** Entity: account Field Name: solutation_id >>
             {
@@ -1393,35 +1376,27 @@ namespace WebVella.Erp.Plugins.Next
 
 
 
-<<<<<<< HEAD
-		}
-        #region << ***Delete relation*** Relation name: solutation_1n_contact >>
-			private static void()
-            {			
-				var response = relMan.Delete(new Guid("54a6e20a-9e94-45fb-b77c-e2bb35cb20fc"));
-				if (!response.Success)
-					throw new Exception("System error 10060. Relation: solutation_1n_contact Delete. Message:" + response.Message);
-			}
-			#endregion
-=======
         }
         #region << ***Delete relation*** Relation name: solutation_1n_contact >>
         private static void DeleteRelationSolutation1nContact(EntityRelationManager relMan)
         {
-            var response = relMan.Delete(new Guid("54a6e20a-9e94-45fb-b77c-e2bb35cb20fc"));
-            if (!response.Success)
-                throw new Exception("System error 10060. Relation: solutation_1n_contact Delete. Message:" + response.Message);
+            {
+                var response = relMan.Delete(new Guid("54a6e20a-9e94-45fb-b77c-e2bb35cb20fc"));
+                if (!response.Success)
+                    throw new Exception("System error 10060. Relation: solutation_1n_contact Delete. Message:" + response.Message);
+            }
         }
         #endregion
 
         #region << ***Delete relation*** Relation name: solutation_1n_account >>
         private static void DeleteRelationSolutation1nAccount(EntityRelationManager relMan)
         {
-            var response = relMan.Delete(new Guid("66f62cd6-174c-4a0b-b56f-6356b24bd73d"));
-            if (!response.Success)
-                throw new Exception("System error 10060. Relation: solutation_1n_account Delete. Message:" + response.Message);
+            {
+                var response = relMan.Delete(new Guid("66f62cd6-174c-4a0b-b56f-6356b24bd73d"));
+                if (!response.Success)
+                    throw new Exception("System error 10060. Relation: solutation_1n_account Delete. Message:" + response.Message);
+            }
         }
         #endregion
->>>>>>> Milan Goranović - Updated
     }
 }

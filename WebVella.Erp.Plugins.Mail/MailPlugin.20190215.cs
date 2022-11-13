@@ -9,17 +9,10 @@ namespace WebVella.Erp.Plugins.Mail
 {
 	public partial class MailPlugin : ErpPlugin
 	{
-<<<<<<< HEAD
-		private static void Patch20190215(EntityManager entMan)
-		{
-			FieldNameContentText();
-			FieldNameServiceId();
-=======
 		private static void Patch20190215(EntityManager entMan, EntityRelationManager relMan)
 		{
 			FieldNameContentText(entMan);
-			FieldNameServiceId(entMan,relMan);
->>>>>>> Milan Goranović - Updated
+			FieldNameServiceId(entMan);
 
 			#region << ***Create entity*** Entity name: email >>
 			{
@@ -5449,11 +5442,7 @@ OFFSET 0
 
 		}
 		#region << ***Create field***  Entity: email Field Name: content_text >>
-<<<<<<< HEAD
-		private static void FieldNameContentText()
-=======
 		private static void FieldNameContentText(EntityManager entMan)
->>>>>>> Milan Goranović - Updated
 		{
 			InputTextField textboxField = new InputTextField();
 				textboxField.Id = new Guid("eb3a49f7-8216-4300-847f-15daca6cd087");
@@ -5484,11 +5473,7 @@ OFFSET 0
 		#endregion
 
 		#region << ***Create field***  Entity: email Field Name: service_id >>
-<<<<<<< HEAD
-		private static void FieldNameServiceId()
-=======
-		private static void FieldNameServiceId(EntityManager entMan, EntityRelationManager relMan)
->>>>>>> Milan Goranović - Updated
+		private static void FieldNameServiceId(EntityManager entMan)
 		{
 			InputGuidField guidField = new InputGuidField();
 				guidField.Id = new Guid("81119e86-bd2d-456b-8215-daafcac2870c");
