@@ -336,7 +336,7 @@ namespace WebVella.Erp.Plugins.Mail.Services
 
 							try
 							{
-								var secOptions = (MailKit.Security.SecureSocketOptions)connectionSecurityNumber;
+								
 							}
 							catch
 							{
@@ -369,7 +369,7 @@ namespace WebVella.Erp.Plugins.Mail.Services
 					}
 				}
 			}
-			else if (rec.Properties.ContainsKey("is_default") && (bool)rec["is_default"] == false)
+			else if (rec.Properties.ContainsKey("is_default") && (bool)rec["is_default"])
 			{
 				var currentRecord = new EqlCommand("SELECT * FROM smtp_service WHERE id = @id", new EqlParameter("id", rec["id"])).Execute();
 				if (currentRecord.Count > 0 && (bool)currentRecord[0]["is_default"])
@@ -577,7 +577,7 @@ namespace WebVella.Erp.Plugins.Mail.Services
 			}
 			catch
 			{
-				return;
+
 			}
 		}
 
@@ -857,7 +857,7 @@ namespace WebVella.Erp.Plugins.Mail.Services
 							email.ServerError = "SMTP service not found.";
 							email.ScheduledOn = null;
 							SaveEmail(email);
-							continue;
+
 						}
 						else
 						{
