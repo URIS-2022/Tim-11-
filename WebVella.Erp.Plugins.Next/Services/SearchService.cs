@@ -173,7 +173,7 @@ namespace WebVella.Erp.Plugins.Next.Services
 
 		}
 
-		private string GetStringValue(string fieldName, Entity entity, EntityRecord record) {
+		private static string GetStringValue(string fieldName, Entity entity, EntityRecord record) {
 			var stringValue = "";
 			if (!record.Properties.ContainsKey(fieldName) || record[fieldName] == null)
 				return stringValue;
@@ -229,18 +229,22 @@ namespace WebVella.Erp.Plugins.Next.Services
 						var exactMeta = (MultiSelectField)fieldMeta;
 						var values = new List<string>();
 						var fieldValue = record[fieldName];
-						if (fieldValue is List<string>)
-							values = (List<string>)fieldValue;
-						else if (fieldValue is string) {
-							var fieldValueString = (string)fieldValue;
-							if (fieldValueString.Contains(","))
-							{
-								values = fieldValueString.Split(",").ToList();
-							}
-							else {
-								values.Add(fieldValueString);
-							}
-						}
+                        if (fieldValue != null)
+                        {
+                            values = (List<string>)fieldValue;
+                        }
+                        else if (fieldValue is string)
+                        {
+                            var fieldValueString = (string)fieldValue;
+                            if (fieldValueString.Contains(","))
+                            {
+                                values = fieldValueString.Split(",").ToList();
+                            }
+                            else
+                            {
+                                values.Add(fieldValueString);
+                            }
+                        }
 						foreach (var value in values)
 						{
 							var option = exactMeta.Options.First(x => x.Value.ToLowerInvariant() == value.ToLowerInvariant());
