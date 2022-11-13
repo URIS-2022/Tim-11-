@@ -19,7 +19,7 @@ namespace WebVella.Erp.Plugins.Next.Services
 			var entities = new EntityManager().ReadEntities().Object;
 			var currentEntity = entities.FirstOrDefault(x => x.Name == entityName);
 			if (currentEntity == null)
-				throw new Exception($"Search index generation failed: Entity {entityName} not found");
+				throw new ArgumentNullException($"Search index generation failed: Entity {entityName} not found");
 
 			// Generate request columns
 			var requestColumns = new List<string>();
@@ -88,8 +88,12 @@ namespace WebVella.Erp.Plugins.Next.Services
 							{
 								var stringValue = GetStringValue(columnName,currentEntity,currentRecord);
 
-								if (!String.IsNullOrWhiteSpace(stringValue))
-									searchIndex += stringValue + " ";
+                                StringBuilder bld = new StringBuilder();
+                                if (!String.IsNullOrWhiteSpace(stringValue))
+                                {
+                                    bld.Append(stringValue);
+                                }
+                                string str = bld.ToString();
 							}
 							catch
 							{
@@ -101,10 +105,10 @@ namespace WebVella.Erp.Plugins.Next.Services
 					{
 						//Related record column
 						var columnNameArray = columnName.Split(".", StringSplitOptions.RemoveEmptyEntries);
-						if (columnNameArray.Length == 2)
+						if (columnNameArray.Length == 2 && currentRecord.Properties.ContainsKey(columnNameArray[0]) && currentRecord[columnNameArray[0]] != null)
 						{
-							if (currentRecord.Properties.ContainsKey(columnNameArray[0]) && currentRecord[columnNameArray[0]] != null)
-							{
+							
+							
 								try
 								{
                                     var relatedRecords = currentRecord[columnNameArray[0]] as List<EntityRecord>;
@@ -137,7 +141,7 @@ namespace WebVella.Erp.Plugins.Next.Services
 								{
 									//Do nothing
 								}
-							}
+							
 						}
 					}
 				}
