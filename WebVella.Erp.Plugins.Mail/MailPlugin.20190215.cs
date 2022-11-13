@@ -9,7 +9,7 @@ namespace WebVella.Erp.Plugins.Mail
 {
 	public partial class MailPlugin : ErpPlugin
 	{
-		private static void Patch20190215(EntityManager entMan, EntityRelationManager relMan)
+		private static void Patch20190215(EntityManager entMan)
 		{
 			FieldNameContentText(entMan);
 			FieldNameServiceId(entMan);
