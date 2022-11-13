@@ -90,7 +90,7 @@ namespace WebVella.Erp.Plugins.Mail
 								catch (ValidationException ex)
 								{
 									var exception = ex;
-									throw ex;
+									throw;
 								}
 								catch (Exception)
 								{
