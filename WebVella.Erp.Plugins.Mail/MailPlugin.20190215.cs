@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Text;
 using System.Text;
 using WebVella.Erp.Api;
 using WebVella.Erp.Api.Models;
+using WebVella.Erp.Database;
 using WebVella.Erp.Web.Models;
 
 namespace WebVella.Erp.Plugins.Mail
@@ -46,11 +48,16 @@ namespace WebVella.Erp.Plugins.Mail
 					//DELETE
 					entity.RecordPermissions.CanDelete.Add(new Guid("f16ec6db-626d-4c27-8de0-3e7ce542c55f"));
 					entity.RecordPermissions.CanDelete.Add(new Guid("bdc56420-caf0-4030-8a0e-d264938e0cda"));
-					{
-						var response = entMan.CreateEntity(entity, systemFieldIdDictionary);
-						if (!response.Success)
-							throw new Exception("System error 10050. Entity: email creation Message: " + response.Message);
-					}
+                    void response1()
+                    {
+                        {
+                            var response = entMan.CreateEntity(entity, systemFieldIdDictionary);
+                            if (!response.Success)
+                                throw new Exception("System error 10050. Entity: email creation");
+                        }
+                    }
+                    response1();
+					
 				}
 				#endregion
 			}
@@ -81,11 +88,47 @@ namespace WebVella.Erp.Plugins.Mail
 				{
 					var response = entMan.CreateField(new Guid("085e2442-820a-4df7-ab92-516ce23197c4"), textboxField, false);
 					if (!response.Success)
-						throw new Exception("System error 10060. Entity: email Field: subject Message:" + response.Message);
+						throw new Exception("System error 10060. Entity: email Field");
 				}
 			}
 			#endregion
 
+<<<<<<< HEAD
+=======
+			#region << ***Create field***  Entity: email Field Name: content_text >>
+			{
+				InputTextField textboxField = new InputTextField();
+				textboxField.Id = new Guid("eb3a49f7-8216-4300-847f-15daca6cd087");
+				textboxField.Name = "content_text";
+				textboxField.Label = "Content text";
+				textboxField.PlaceholderText = null;
+				textboxField.Description = null;
+				textboxField.HelpText = null;
+				textboxField.Required = false;
+				textboxField.Unique = false;
+				textboxField.Searchable = false;
+				textboxField.Auditable = false;
+				textboxField.System = true;
+				textboxField.DefaultValue = null;
+				textboxField.MaxLength = null;
+				textboxField.EnableSecurity = false;
+				textboxField.Permissions = new FieldPermissions();
+				textboxField.Permissions.CanRead = new List<Guid>();
+				textboxField.Permissions.CanUpdate = new List<Guid>();
+				//READ
+				//UPDATE
+				void response2(){
+                    
+                        var response = entMan.CreateField(new Guid("085e2442-820a-4df7-ab92-516ce23197c4"), textboxField, false);
+                        if (!response.Success)
+                            throw new Exception("System error 10060. Entity: email Field");
+                    
+                }
+				response2();
+				
+			}
+			#endregion
+>>>>>>> CA2221 S3345 S1481 S112 S1199
 
 			#region << ***Create field***  Entity: email Field Name: content_html >>
 			{
@@ -108,11 +151,12 @@ namespace WebVella.Erp.Plugins.Mail
 				htmlField.Permissions.CanUpdate = new List<Guid>();
 				//READ
 				//UPDATE
-				{
+				void update1(){
 					var response = entMan.CreateField(new Guid("085e2442-820a-4df7-ab92-516ce23197c4"), htmlField, false);
 					if (!response.Success)
-						throw new Exception("System error 10060. Entity: email Field: content_html Message:" + response.Message);
+						throw new Exception("System error 10060. Entity: email Field");
 				}
+				update1();
 			}
 			#endregion
 
@@ -5441,6 +5485,7 @@ OFFSET 0
 
 
 		}
+<<<<<<< HEAD
 		#region << ***Create field***  Entity: email Field Name: content_text >>
 		private static void FieldNameContentText(EntityManager entMan)
 		{
@@ -5502,5 +5547,9 @@ OFFSET 0
 				}
 		}
 		#endregion
+=======
+
+		
+>>>>>>> CA2221 S3345 S1481 S112 S1199
 	}
 }

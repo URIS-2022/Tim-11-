@@ -1268,9 +1268,12 @@ namespace WebVella.Erp.Plugins.Mail.Api
 				message.From.Add(new MailboxAddress(sender.Name, sender.Address));
 			else
 				message.From.Add(new MailboxAddress(sender.Address, sender.Address));
-
-			foreach (var recipient in recipients)
-			{
+            if ((recipients?.Count ?? 0) == 0)
+            {
+                return;
+            }
+            foreach (var recipient in recipients)
+			{	
 				if (!string.IsNullOrWhiteSpace(recipient.Name))
 					message.To.Add(new MailboxAddress(recipient.Name, recipient.Address));
 				else
