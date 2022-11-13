@@ -93,7 +93,7 @@ namespace WebVella.Erp.Plugins.Next.Services
                                 {
                                     bld.Append(stringValue);
                                 }
-                                string str = bld.ToString();
+
 							}
 							catch
 							{
@@ -117,14 +117,20 @@ namespace WebVella.Erp.Plugins.Next.Services
 										
 										foreach (var relatedRecord in relatedRecords)
 										{
-											if (relatedRecord.Properties.ContainsKey(columnNameArray[1]) && relatedRecord[columnNameArray[1]] != null)
-											{
-												var stringValue = relatedRecord[columnNameArray[1]].ToString();
-												if (!String.IsNullOrWhiteSpace(stringValue))
-													searchIndex += stringValue + " ";
-											}
-										}
+                                        if (relatedRecord.Properties.ContainsKey(columnNameArray[1]) && relatedRecord[columnNameArray[1]] != null)
+                                        {
+                                            var stringValue = relatedRecord[columnNameArray[1]].ToString();
+
+                                            StringBuilder bld = new StringBuilder();
+
+                                            if (!String.IsNullOrWhiteSpace(stringValue))
+
+                                                bld.Append(stringValue);
+                                        }
+                                        }
 									}
+									
+
 									else if (currentRecord[columnNameArray[0]] is EntityRecord)
 									{
 										var relatedRecord = (EntityRecord)currentRecord[columnNameArray[0]];
@@ -132,8 +138,12 @@ namespace WebVella.Erp.Plugins.Next.Services
 										if (relatedRecord.Properties.ContainsKey(columnNameArray[1]) && relatedRecord[columnNameArray[1]] != null)
 										{
 											var stringValue = relatedRecord[columnNameArray[1]].ToString();
-											if (!String.IsNullOrWhiteSpace(stringValue))
-												searchIndex += stringValue + " ";
+
+                                            StringBuilder bld = new StringBuilder();
+                                        if (!String.IsNullOrWhiteSpace(stringValue))
+                                        {
+                                            bld.Append(stringValue);
+                                        }
 										}
 									}
 								}
