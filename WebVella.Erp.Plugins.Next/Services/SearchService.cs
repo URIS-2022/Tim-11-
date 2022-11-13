@@ -233,7 +233,7 @@ namespace WebVella.Erp.Plugins.Next.Services
                         {
                             values = (List<string>)fieldValue;
                         }
-                        else if (fieldValue is string)
+                        else
                         {
                             var fieldValueString = (string)fieldValue;
                             if (fieldValueString.Contains(","))
