@@ -84,7 +84,7 @@ namespace WebVella.Erp.Plugins.Crm
 						SavePluginData(JsonConvert.SerializeObject(currentPluginSettings));
 
 						connection.CommitTransaction();
-						//connection.RollbackTransaction();
+						
 					}
 					catch (ValidationException ex)
 					{
