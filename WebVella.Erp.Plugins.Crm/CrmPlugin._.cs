@@ -77,9 +77,7 @@ namespace WebVella.Erp.Plugins.Crm
 						//		}
 						//	}
 						//}
-
 						#endregion
-
 
 						SavePluginData(JsonConvert.SerializeObject(currentPluginSettings));
 
