@@ -160,7 +160,7 @@ namespace WebVella.Erp.Plugins.SDK.Pages.ErpEntity
             var allCards = AdminPageUtils.GetFieldCards();
 
             if (FieldTypeId == 20) //RelationField
-                throw new Exception("RelationField is unsupported field type");
+                throw new ArgumentException("RelationField is unsupported field type");
 
             FieldCard = allCards.First(x => (string)x["type"] == FieldTypeId.ToString());
 

@@ -99,7 +99,7 @@ namespace WebVella.Erp.Plugins.Project.Components
 					if (Guid.TryParse(selectedAccountIdString, out Guid selectedAccountId))
 						accountId = selectedAccountId;
 					else if (!String.IsNullOrWhiteSpace(selectedAccountIdString))
-						throw new Exception("Selected account id is not GUID.");
+						throw new ArgumentNullException("Selected account id is not GUID.");
 
 					List<EntityRecord> data = new ReportService().GetTimelogData(year, month, accountId);
 

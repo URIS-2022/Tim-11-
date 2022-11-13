@@ -333,7 +333,7 @@ namespace WebVella.Erp.Plugins.Mail
 				{
 					var response = entMan.CreateField(new Guid("085e2442-820a-4df7-ab92-516ce23197c4"), datetimeField, false);
 					if (!response.Success)
-						throw new Exception("System error 10060. Entity: email Field: scheduled_on Message:" + response.Message);
+						throw new ArgumentException("System error 10060. Entity: email Field: scheduled_on Message:" + response.Message);
 				}
 			}
 			#endregion
