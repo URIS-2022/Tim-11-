@@ -170,7 +170,7 @@ namespace WebVella.Erp.Plugins.Mail.Services
 
 							try
 							{
-								var secOptions = (MailKit.Security.SecureSocketOptions)connectionSecurityNumber;
+								
 							}
 							catch
 							{
