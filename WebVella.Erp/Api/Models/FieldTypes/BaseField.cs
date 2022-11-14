@@ -48,12 +48,12 @@ namespace WebVella.Erp
         [JsonProperty(PropertyName = "enableSecurity")]
         public bool EnableSecurity { get; set; }
 
-        public InputField()
+        protected InputField()
         {
             Permissions = new FieldPermissions();
         }
 
-        public InputField(InputField field)
+        protected InputField(InputField field)
         {
             Id = field.Id;
             Name = field.Name;
