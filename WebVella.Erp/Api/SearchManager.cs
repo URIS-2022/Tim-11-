@@ -13,7 +13,7 @@ namespace WebVella.Erp.Api
 {
 	public class SearchManager
 	{
-		private FtsAnalyzer ftsAnalyzer = new FtsAnalyzer();
+		private readonly FtsAnalyzer ftsAnalyzer = new FtsAnalyzer();
 
 		public SearchResultList Search(SearchQuery query)
 		{

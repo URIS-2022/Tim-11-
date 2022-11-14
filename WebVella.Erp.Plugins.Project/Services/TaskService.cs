@@ -360,9 +360,8 @@ namespace WebVella.Erp.Plugins.Project.Services
 						watchers.Add(userId);
 				}
 			}
-			if (projectOwnerId != null)
+			if (projectOwnerId != null && !watchers.Contains(projectOwnerId.Value))
 			{
-				if (!watchers.Contains(projectOwnerId.Value))
 					watchers.Add(projectOwnerId.Value);
 			}
 

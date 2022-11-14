@@ -152,7 +152,7 @@ namespace WebVella.Erp.Plugins.Next
 								catch (ValidationException ex)
 								{
 									var exception = ex;
-									throw ex;
+									throw;
 								}
 								catch (Exception)
 								{
@@ -174,7 +174,7 @@ namespace WebVella.Erp.Plugins.Next
 								catch (ValidationException ex)
 								{
 									var exception = ex;
-									throw ex;
+									throw;
 								}
 								catch (Exception)
 								{

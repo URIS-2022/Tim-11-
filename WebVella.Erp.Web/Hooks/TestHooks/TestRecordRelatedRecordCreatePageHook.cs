@@ -20,10 +20,9 @@ namespace WebVella.Erp.Web.Hooks.TestHooks
 
 		public IActionResult OnPreCreateRecord(EntityRecord record, Entity entity, RecordRelatedRecordCreatePageModel pageModel, List<ValidationError> validationErrors)
 		{
-			if( record.Properties.ContainsKey("name"))
+			if( record.Properties.ContainsKey("name") && record["name"] as string == "123")
 			{
-				if (record["name"] as string == "123")
-					validationErrors.Add(new ValidationError("name", "123 value is not permitted"));
+				validationErrors.Add(new ValidationError("name", "123 value is not permitted"));
 			}
 			return null;
 		}
