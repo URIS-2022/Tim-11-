@@ -234,10 +234,10 @@ namespace WebVella.Erp.Plugins.Next.Services
                         {
                             values = (List<string>)fieldValue;
                         }
-                        else
+                        else if (string.IsNullOrEmpty(stringValue))
                         {
                             var fieldValueString = (string)fieldValue;
-                            if (fieldValueString.Contains(","))
+                            if (fieldValueString.Contains(','))
                             {
                                 values = fieldValueString.Split(",").ToList();
                             }
