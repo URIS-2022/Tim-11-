@@ -246,10 +246,8 @@ namespace WebVella.Erp.Plugins.Next.Services
                                 values.Add(fieldValueString);
                             }
                         }
-                        else if(string.IsNullOrEmpty(string.Empty))
-                        {
-                            values.Add(stringValue);
-                        }
+                        else
+                            Console.WriteLine();
                       
 						foreach (var value in values)
 						{
