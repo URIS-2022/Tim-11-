@@ -259,7 +259,7 @@ namespace WebVella.Erp.Plugins.Next.Services
 							}
 							else 
                             {
-                                bld.Append(stringValue);
+                                bld.Append(stringValue.ToLowerInvariant());
 							}
 						}
 					}
