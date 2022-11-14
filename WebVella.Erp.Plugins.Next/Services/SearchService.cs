@@ -233,7 +233,7 @@ namespace WebVella.Erp.Plugins.Next.Services
                         {
                             values = (List<string>)fieldValue;
                         }
-                        else if (!string.IsNullOrEmpty(stringValue))
+                        else if (string.IsNullOrEmpty(stringValue))
                         {
                             var fieldValueString = (string)fieldValue;
                             if (fieldValueString.Contains(','))
@@ -244,6 +244,10 @@ namespace WebVella.Erp.Plugins.Next.Services
                             {
                                 values.Add(fieldValueString);
                             }
+                        }
+                        else if(string.IsNullOrEmpty(string.Empty))
+                        {
+                            values.Add(stringValue);
                         }
                       
 						foreach (var value in values)
