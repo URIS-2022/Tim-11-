@@ -87,7 +87,11 @@ namespace WebVella.Erp.Plugins.Mail
 								catch (ValidationException ex)
 								{
 									var exception = ex;
+<<<<<<< HEAD
 									throw ex;
+=======
+									throw;
+>>>>>>> Milan Goranović - Updated
 								}
 								
 							}

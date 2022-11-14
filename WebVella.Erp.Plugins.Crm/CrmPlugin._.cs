@@ -18,11 +18,21 @@ namespace WebVella.Erp.Plugins.Crm
 			{
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 				
 				var relMan = new EntityRelationManager();
 =======
 				var entMan = new EntityManager();
 >>>>>>> c1
+=======
+<<<<<<< Updated upstream
+				var entMan = new EntityManager();
+=======
+				
+				var relMan = new EntityRelationManager();
+				var recMan = new RecordManager();
+>>>>>>> Stashed changes
+>>>>>>> Milan Goranović - Updated
 				var storeSystemSettings = DbContext.Current.SettingsRepository.Read();
 				var systemSettings = new SystemSettings(storeSystemSettings);
 
