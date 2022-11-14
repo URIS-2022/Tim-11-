@@ -252,12 +252,14 @@ namespace WebVella.Erp.Plugins.Next.Services
 						foreach (var value in values)
 						{
 							var option = exactMeta.Options.First(x => x.Value.ToLowerInvariant() == value.ToLowerInvariant());
-							if (option != null)
+                            StringBuilder bld = new StringBuilder();
+                            if (option != null)
 							{
-								stringValue += option.Label + " ";
+                                bld.Append(stringValue);
 							}
-							else {
-								stringValue += value + " ";
+							else 
+                            {
+                                bld.Append(stringValue);
 							}
 						}
 					}
