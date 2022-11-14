@@ -164,7 +164,10 @@ namespace WebVella.Erp.Utilities.Dynamic
                 {
                     return GetProperty(Instance, binder.Name, out result);
                 }
-                catch { }
+                catch(Exception e)
+				{
+					throw;
+				}
             }
 
             // failed to retrieve a property
@@ -192,7 +195,10 @@ namespace WebVella.Erp.Utilities.Dynamic
                     if (result)
                         return true;
                 }
-                catch { }
+                catch (Exception e)
+				{
+					throw;
+				}
             }
 
             // no match - set or add to dictionary
