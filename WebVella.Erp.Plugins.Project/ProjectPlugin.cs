@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Ical.Net.DataTypes;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using WebVella.Erp.Api;
@@ -40,10 +41,16 @@ namespace WebVella.Erp.Plugins.Project
 
         private static void StackAdd1()
         {
-            DateTime utcNow = DateTime.UtcNow;
+            StackAdd2();
+
             
+        }
+
+		private static void StackAdd2()
+		{
             #region << StartTasksOnStartDate >>
             {
+                DateTime utcNow = DateTime.UtcNow;
                 Guid checkBotSchedulePlanId = new Guid("6765D758-FB63-478F-B714-5B153AB9A758");
                 string planName = "Start tasks on start_date";
                 SchedulePlan checkBotSchedulePlan = ScheduleManager.Current.GetSchedulePlan(checkBotSchedulePlanId);
