@@ -1,9 +1,9 @@
 ﻿$(function () {
 
-	var WvPageSelectionTree = "{{PageSelectionTreeJson}}";
+    let WvPageSelectionTree = "{{PageSelectionTreeJson}}";
 
-	function WvAdminSitemap() {
-		var WvAdminSitemapSelectors = {};
+    function WvAdminSitemap() {
+        let WvAdminSitemapSelectors = {};
 		WvAdminSitemapSelectors.typeSelect = "#input-{{typeOptionsFieldId}}";
 		WvAdminSitemapSelectors.appSelect = "#input-{{appOptionsFieldId}}";
 		WvAdminSitemapSelectors.areaSelect = "#input-{{areaOptionsFieldId}}";
@@ -14,7 +14,7 @@
 		return WvAdminSitemapSelectors;
 	}
 
-	var WvAdminSitemapSelectors = WvAdminSitemap();
+	let WvAdminSitemapSelectors = WvAdminSitemap();
 
 	var selectInitObject = {
 		theme: 'bootstrap4',
