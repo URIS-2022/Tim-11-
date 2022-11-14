@@ -63,17 +63,14 @@ namespace WebVella.Erp.Plugins.Mail
 								try
 								{
 									currentPluginSettings.Version = patchVersion;
-									Patch20190215(entMan, relMan, recMan);
+									Patch20190215(entMan);
 								}
 								catch (ValidationException ex)
 								{
 									var exception = ex;
 									throw ex;
 								}
-								catch (Exception)
-								{
-									throw;
-								}
+								
 							}
 						}
 
@@ -85,17 +82,25 @@ namespace WebVella.Erp.Plugins.Mail
 								try
 								{
 									currentPluginSettings.Version = patchVersion;
-									Patch20190419(entMan, relMan, recMan);
+									Patch20190419(entMan, recMan);
 								}
 								catch (ValidationException ex)
 								{
 									var exception = ex;
+<<<<<<< HEAD
 									throw;
 								}
 								catch (Exception)
 								{
+=======
+<<<<<<< HEAD
+									throw ex;
+=======
+>>>>>>> MilanGoranović
 									throw;
+>>>>>>> Milan Goranović - Updated
 								}
+								
 							}
 						}
 
@@ -111,12 +116,16 @@ namespace WebVella.Erp.Plugins.Mail
 								}
 								catch (ValidationException ex)
 								{
+<<<<<<< HEAD
 									throw;
 								}
 								catch (Exception)
 								{
+=======
+>>>>>>> MilanGoranović
 									throw;
 								}
+								
 							}
 						}
 
@@ -132,7 +141,7 @@ namespace WebVella.Erp.Plugins.Mail
 								catch (ValidationException ex)
 								{
 									var exception = ex;
-									throw ex;
+									throw;
 								}
 								catch (Exception)
 								{
@@ -174,13 +183,10 @@ namespace WebVella.Erp.Plugins.Mail
 								}
 								catch (ValidationException ex)
 								{
-									var exception = ex;
+									
 									throw ex;
 								}
-								catch (Exception)
-								{
-									throw;
-								}
+								
 							}
 						}
 

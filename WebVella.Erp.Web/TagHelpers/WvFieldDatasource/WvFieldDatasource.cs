@@ -49,6 +49,7 @@ namespace WebVella.Erp.Web.TagHelpers
 				}
 				catch
 				{
+					throw;
 				}
 			}
 			#endregion

@@ -53,12 +53,9 @@ namespace WebVella.Erp.Plugins.Project.Controllers
 			}
 
 			Guid? parentId = null;
-			if (record.Properties.ContainsKey("parentId") && record["parentId"] != null)
-			{
-				if (Guid.TryParse((string)record["parentId"], out Guid outGuid2))
-				{
-					parentId = outGuid2;
-				}
+			if (record.Properties.ContainsKey("parentId") && record["parentId"] != null && Guid.TryParse((string)record["parentId"], out Guid outGuid2))
+			{			
+				parentId = outGuid2;				
 			}
 
 			var scope = new List<string>() { "projects" };

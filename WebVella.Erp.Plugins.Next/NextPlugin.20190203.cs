@@ -782,7 +782,7 @@ namespace WebVella.Erp.Plugins.Next
 				{
 					var response = entMan.CreateField(new Guid("db83b9b0-448c-4675-be71-640aca2e2a3a"), guidField, false);
 					if (!response.Success)
-						throw new Exception("System error 10060. Entity: feed_item Field: created_by Message:" + response.Message);
+						throw new ArgumentException("System error 10060. Entity: feed_item Field: created_by Message:" + response.Message);
 				}
 			}
 			#endregion

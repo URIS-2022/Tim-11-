@@ -13,13 +13,7 @@ namespace WebVella.Erp.Plugins.Project
 	{
 		private static void Patch20190207(EntityManager entMan, EntityRelationManager relMan, RecordManager recMan)
 		{
-
-			#region << ***Delete page body node*** Page name: create ID: ecef4b2c-6988-44c1-acea-0e28385ec528 >>
-			{
-
-				new WebVella.Erp.Web.Services.PageService().DeletePageBodyNode(new Guid("ecef4b2c-6988-44c1-acea-0e28385ec528"), WebVella.Erp.Database.DbContext.Current.Transaction, cascade: false);
-			}
-			#endregion
+			DelegatePageBodyNode1();
 
 			#region << ***Delete page body node*** Page name: create ID: 884a8db1-aff0-4f86-ab7d-8fb17698fc33 >>
 			{
@@ -75,5 +69,12 @@ namespace WebVella.Erp.Plugins.Project
 
 
 		}
+		#region << ***Delete page body node*** Page name: create ID: ecef4b2c-6988-44c1-acea-0e28385ec528 >>
+		private static void DelegatePageBodyNode1()
+		{
+               new WebVella.Erp.Web.Services.PageService().DeletePageBodyNode(new Guid("ecef4b2c-6988-44c1-acea-0e28385ec528"), WebVella.Erp.Database.DbContext.Current.Transaction, cascade: false);
+        }
+		#endregion
+
 	}
 }

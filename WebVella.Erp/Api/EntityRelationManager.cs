@@ -324,8 +324,10 @@ namespace WebVella.Erp.Api
             {
                 response.Success = false;
 				if (ErpSettings.DevelopmentMode)
-					response.Message = e.Message + e.StackTrace;
-                return response;
+				{
+                   response.Message = e.Message + e.StackTrace;
+				}
+				return response;
             }
         }
 

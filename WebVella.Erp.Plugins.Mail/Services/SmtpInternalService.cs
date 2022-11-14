@@ -545,7 +545,10 @@ namespace WebVella.Erp.Plugins.Mail.Services
 							Uri uri = new Uri(src);
 							src = uri.AbsolutePath;
 						}
-						catch { }
+						catch 
+						{
+							throw;
+						}
 
 						if (src.StartsWith("/fs"))
 							src = src.Substring(3);

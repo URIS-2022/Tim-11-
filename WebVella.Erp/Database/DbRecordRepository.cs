@@ -282,8 +282,14 @@ namespace WebVella.Erp.Database
 
                 Entity entity = new EntityManager().ReadEntity(query.EntityName).Object;
                 List<NpgsqlParameter> parameters = new List<NpgsqlParameter>();
-				if( query != null )
+				if (query != null)
 					GenerateWhereClause(query.Query, entity, ref whereSql, ref whereJoinSql, ref parameters, query.OverwriteArgs);
+				else
+				{
+					query = null;
+				}
+					
+				
 
                 if (whereJoinSql.Length > 0)
                     sql = sql + "  " + whereJoinSql;
@@ -525,7 +531,7 @@ namespace WebVella.Erp.Database
 				if (value == null)
 					return null;
 				else if (value is JArray)
-					return ((JArray)value).Select(x => ((JToken)x).Value<string>()).ToList<string>();
+					return ((JArray)value).Select(x => (x).Value<string>()).ToList<string>();
 				else if (value is List<object>)
 					return ((List<object>)value).Select(x => ((object)x).ToString()).ToList<string>();
 				else if (value is string[])

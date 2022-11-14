@@ -18,7 +18,7 @@ namespace WebVella.Erp.Web.Models
 
 		DataSourceManager dsMan = new DataSourceManager();
 		RecordManager recMan = new RecordManager();
-		EntityRelationManager relMan = new EntityRelationManager();
+
 		EntityManager entMan = new EntityManager();
 		BaseErpPageModel erpPageModel = null;
 		private Dictionary<string, MPW> Properties = new Dictionary<string, MPW>();
@@ -790,7 +790,7 @@ namespace WebVella.Erp.Web.Models
 		}
 
 		//ModelPropertyWrapper
-		private class MPW
+		private sealed class MPW
 		{
 			public MPT Type { get; set; }
 

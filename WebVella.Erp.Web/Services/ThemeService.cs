@@ -9,7 +9,7 @@ namespace WebVella.Erp.Web.Services
 {
 	public class ThemeService : BaseService
 	{
-		Theme theme = new Theme();
+		readonly Theme theme = new Theme();
 
 		public Theme Get()
 		{

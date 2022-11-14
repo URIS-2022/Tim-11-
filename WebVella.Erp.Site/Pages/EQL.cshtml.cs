@@ -22,7 +22,7 @@ namespace WebVella.Erp.Site.Pages
 		public string Sql { get; set; }
 		public string Meta { get; set; }
 
-		List<EqlParameter> parameters = new List<EqlParameter> {
+		readonly List<EqlParameter> parameters = new List<EqlParameter> {
 				new EqlParameter("@email", null),
 				new EqlParameter("@role_name", "administrator"),
 				new EqlParameter("@order_field", "first_name"),

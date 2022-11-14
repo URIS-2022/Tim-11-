@@ -17,7 +17,25 @@ namespace WebVella.Erp.Plugins.Crm
 			using (SecurityContext.OpenSystemScope())
 			{
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+				
+				var relMan = new EntityRelationManager();
+=======
 				var entMan = new EntityManager();
+<<<<<<< HEAD
+=======
+>>>>>>> c1
+=======
+<<<<<<< Updated upstream
+				var entMan = new EntityManager();
+=======
+				
+				var relMan = new EntityRelationManager();
+				var recMan = new RecordManager();
+>>>>>>> Stashed changes
+>>>>>>> Milan Goranović - Updated
+>>>>>>> MilanGoranović
 				var storeSystemSettings = DbContext.Current.SettingsRepository.Read();
 				var systemSettings = new SystemSettings(storeSystemSettings);
 
@@ -75,19 +93,17 @@ namespace WebVella.Erp.Plugins.Crm
 						//		}
 						//	}
 						//}
-
 						#endregion
-
 
 						SavePluginData(JsonConvert.SerializeObject(currentPluginSettings));
 
 						connection.CommitTransaction();
-						//connection.RollbackTransaction();
+						
 					}
 					catch (ValidationException ex)
 					{
 						connection.RollbackTransaction();
-						throw ex;
+						throw;
 					}
 					catch (Exception)
 					{

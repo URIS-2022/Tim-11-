@@ -11,8 +11,11 @@ namespace WebVella.Erp.Plugins.Mail
 {
 	public partial class MailPlugin : ErpPlugin
 	{
-		private static void Patch20190215(EntityManager entMan, EntityRelationManager relMan, RecordManager recMan)
+		private static void Patch20190215(EntityManager entMan)
 		{
+			FieldNameContentText(entMan);
+			FieldNameServiceId(entMan);
+
 			#region << ***Create entity*** Entity name: email >>
 			{
 				#region << entity >>
@@ -92,6 +95,12 @@ namespace WebVella.Erp.Plugins.Mail
 			}
 			#endregion
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+<<<<<<< Updated upstream
+>>>>>>> Milan Goranović - Updated
 			#region << ***Create field***  Entity: email Field Name: content_text >>
 			{
 				InputTextField textboxField = new InputTextField();
@@ -125,6 +134,12 @@ namespace WebVella.Erp.Plugins.Mail
 				
 			}
 			#endregion
+<<<<<<< HEAD
+>>>>>>> CA2221 S3345 S1481 S112 S1199
+=======
+=======
+>>>>>>> Stashed changes
+>>>>>>> Milan Goranović - Updated
 
 			#region << ***Create field***  Entity: email Field Name: content_html >>
 			{
@@ -280,35 +295,7 @@ namespace WebVella.Erp.Plugins.Mail
 			}
 			#endregion
 
-			#region << ***Create field***  Entity: email Field Name: service_id >>
-			{
-				InputGuidField guidField = new InputGuidField();
-				guidField.Id = new Guid("81119e86-bd2d-456b-8215-daafcac2870c");
-				guidField.Name = "service_id";
-				guidField.Label = "Service Identifier";
-				guidField.PlaceholderText = null;
-				guidField.Description = null;
-				guidField.HelpText = null;
-				guidField.Required = true;
-				guidField.Unique = false;
-				guidField.Searchable = true;
-				guidField.Auditable = false;
-				guidField.System = true;
-				guidField.DefaultValue = Guid.Parse("00000000-0000-0000-0000-000000000000");
-				guidField.GenerateNewId = false;
-				guidField.EnableSecurity = false;
-				guidField.Permissions = new FieldPermissions();
-				guidField.Permissions.CanRead = new List<Guid>();
-				guidField.Permissions.CanUpdate = new List<Guid>();
-				//READ
-				//UPDATE
-				{
-					var response = entMan.CreateField(new Guid("085e2442-820a-4df7-ab92-516ce23197c4"), guidField, false);
-					if (!response.Success)
-						throw new Exception("System error 10060. Entity: email Field: service_id Message:" + response.Message);
-				}
-			}
-			#endregion
+			
 
 			#region << ***Create field***  Entity: email Field Name: priority >>
 			{
@@ -401,7 +388,7 @@ namespace WebVella.Erp.Plugins.Mail
 				{
 					var response = entMan.CreateField(new Guid("085e2442-820a-4df7-ab92-516ce23197c4"), datetimeField, false);
 					if (!response.Success)
-						throw new Exception("System error 10060. Entity: email Field: scheduled_on Message:" + response.Message);
+						throw new ArgumentException("System error 10060. Entity: email Field: scheduled_on Message:" + response.Message);
 				}
 			}
 			#endregion
@@ -1243,7 +1230,7 @@ namespace WebVella.Erp.Plugins.Mail
 				var system = false;
 				var layout = @"";
 				var weight = 10;
-				var type = (PageType)((int)5);
+				var type = (PageType)(5);
 				var isRazorBody = false;
 				Guid? appId = new Guid("9d3b5497-e136-43b7-ad87-857e615a54c9");
 				Guid? entityId = new Guid("17698b9f-e533-4f8d-a651-a00f7de2989e");
@@ -5509,7 +5496,145 @@ OFFSET 0
 
 
 		}
+<<<<<<< HEAD
 
 		
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+		#region << ***Create field***  Entity: email Field Name: content_text >>
+		private static void FieldNameContentText(EntityManager entMan)
+		{
+			InputTextField textboxField = new InputTextField();
+				textboxField.Id = new Guid("eb3a49f7-8216-4300-847f-15daca6cd087");
+				textboxField.Name = "content_text";
+				textboxField.Label = "Content text";
+				textboxField.PlaceholderText = null;
+				textboxField.Description = null;
+				textboxField.HelpText = null;
+				textboxField.Required = false;
+				textboxField.Unique = false;
+				textboxField.Searchable = false;
+				textboxField.Auditable = false;
+				textboxField.System = true;
+				textboxField.DefaultValue = null;
+				textboxField.MaxLength = null;
+				textboxField.EnableSecurity = false;
+				textboxField.Permissions = new FieldPermissions();
+				textboxField.Permissions.CanRead = new List<Guid>();
+				textboxField.Permissions.CanUpdate = new List<Guid>();
+				//READ
+				//UPDATE
+				{
+					var response = entMan.CreateField(new Guid("085e2442-820a-4df7-ab92-516ce23197c4"), textboxField, false);
+					if (!response.Success)
+						throw new Exception("System error 10060. Entity: email Field: content_text Message:" + response.Message);
+				}
+		}
+		#endregion
+
+		#region << ***Create field***  Entity: email Field Name: service_id >>
+		private static void FieldNameServiceId(EntityManager entMan)
+		{
+			InputGuidField guidField = new InputGuidField();
+				guidField.Id = new Guid("81119e86-bd2d-456b-8215-daafcac2870c");
+				guidField.Name = "service_id";
+				guidField.Label = "Service Identifier";
+				guidField.PlaceholderText = null;
+				guidField.Description = null;
+				guidField.HelpText = null;
+				guidField.Required = true;
+				guidField.Unique = false;
+				guidField.Searchable = true;
+				guidField.Auditable = false;
+				guidField.System = true;
+				guidField.DefaultValue = Guid.Parse("00000000-0000-0000-0000-000000000000");
+				guidField.GenerateNewId = false;
+				guidField.EnableSecurity = false;
+				guidField.Permissions = new FieldPermissions();
+				guidField.Permissions.CanRead = new List<Guid>();
+				guidField.Permissions.CanUpdate = new List<Guid>();
+				//READ
+				//UPDATE
+				{
+					var response = entMan.CreateField(new Guid("085e2442-820a-4df7-ab92-516ce23197c4"), guidField, false);
+					if (!response.Success)
+						throw new Exception("System error 10060. Entity: email Field: service_id Message:" + response.Message);
+				}
+		}
+		#endregion
+=======
+
+		
+>>>>>>> CA2221 S3345 S1481 S112 S1199
+=======
+<<<<<<< Updated upstream
+
+		
+=======
+		#region << ***Create field***  Entity: email Field Name: content_text >>
+		private static void FieldNameContentText(EntityManager entMan)
+		{
+			InputTextField textboxField = new InputTextField();
+				textboxField.Id = new Guid("eb3a49f7-8216-4300-847f-15daca6cd087");
+				textboxField.Name = "content_text";
+				textboxField.Label = "Content text";
+				textboxField.PlaceholderText = null;
+				textboxField.Description = null;
+				textboxField.HelpText = null;
+				textboxField.Required = false;
+				textboxField.Unique = false;
+				textboxField.Searchable = false;
+				textboxField.Auditable = false;
+				textboxField.System = true;
+				textboxField.DefaultValue = null;
+				textboxField.MaxLength = null;
+				textboxField.EnableSecurity = false;
+				textboxField.Permissions = new FieldPermissions();
+				textboxField.Permissions.CanRead = new List<Guid>();
+				textboxField.Permissions.CanUpdate = new List<Guid>();
+				//READ
+				//UPDATE
+				{
+					var response = entMan.CreateField(new Guid("085e2442-820a-4df7-ab92-516ce23197c4"), textboxField, false);
+					if (!response.Success)
+						throw new Exception("System error 10060. Entity: email Field: content_text Message:" + response.Message);
+				}
+		}
+		#endregion
+
+		#region << ***Create field***  Entity: email Field Name: service_id >>
+		private static void FieldNameServiceId(EntityManager entMan)
+		{
+			InputGuidField guidField = new InputGuidField();
+				guidField.Id = new Guid("81119e86-bd2d-456b-8215-daafcac2870c");
+				guidField.Name = "service_id";
+				guidField.Label = "Service Identifier";
+				guidField.PlaceholderText = null;
+				guidField.Description = null;
+				guidField.HelpText = null;
+				guidField.Required = true;
+				guidField.Unique = false;
+				guidField.Searchable = true;
+				guidField.Auditable = false;
+				guidField.System = true;
+				guidField.DefaultValue = Guid.Parse("00000000-0000-0000-0000-000000000000");
+				guidField.GenerateNewId = false;
+				guidField.EnableSecurity = false;
+				guidField.Permissions = new FieldPermissions();
+				guidField.Permissions.CanRead = new List<Guid>();
+				guidField.Permissions.CanUpdate = new List<Guid>();
+				//READ
+				//UPDATE
+				{
+					var response = entMan.CreateField(new Guid("085e2442-820a-4df7-ab92-516ce23197c4"), guidField, false);
+					if (!response.Success)
+						throw new Exception("System error 10060. Entity: email Field: service_id Message:" + response.Message);
+				}
+		}
+		#endregion
+>>>>>>> Stashed changes
+>>>>>>> Milan Goranović - Updated
+>>>>>>> MilanGoranović
 	}
 }

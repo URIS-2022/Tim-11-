@@ -295,7 +295,7 @@ namespace WebVella.Erp.Jobs
 				}
 				finally
 				{
-					try { await Task.Delay(10000, stoppingToken); } catch (TaskCanceledException) { };
+					try { await Task.Delay(10000, stoppingToken); } catch (TaskCanceledException) { }
 				}
 			}
 		}

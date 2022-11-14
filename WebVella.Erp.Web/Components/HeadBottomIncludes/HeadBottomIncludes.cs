@@ -88,7 +88,6 @@ namespace WebVella.Erp.Web.Components
 
 
 				//var stencilComponents = new List<string>(){"wv-lazyload", "wv-timelog-list", "wv-pb-manager", 
-				//	"wv-sitemap-manager", "wv-datasource-manage","wv-post-list", "wv-feed-list", "wv-recurrence-template"};
 
 				var stencilComponents = new List<string>(){"wv-lazyload"};
 

@@ -9,6 +9,12 @@ namespace WebVella.Erp.Web.Repositories
 {
 	internal class AppRepository : BaseDbRepository
 	{
+		[Flags]
+	    enum NpgsqlDbType
+		{
+			Array,
+			Uuid
+		}
 		public AppRepository(string conString) : base(conString) { }
 
 		/// <summary>
@@ -263,9 +269,9 @@ namespace WebVella.Erp.Web.Repositories
 			command.Parameters.Add(new NpgsqlParameter("@weight", weight));
 
 			if (access != null && access.Count > 0)
-				command.Parameters.Add("@access", NpgsqlDbType.Array | NpgsqlDbType.Uuid).Value = access.ToArray();
+				command.Parameters.Add("@access", (NpgsqlTypes.NpgsqlDbType)(NpgsqlDbType.Array | NpgsqlDbType.Uuid)).Value = access.ToArray();
 			else
-				command.Parameters.Add("@access", NpgsqlDbType.Array | NpgsqlDbType.Uuid).Value = new List<Guid>().ToArray();
+				command.Parameters.Add("@access", (NpgsqlTypes.NpgsqlDbType)(NpgsqlDbType.Array | NpgsqlDbType.Uuid)).Value = new List<Guid>().ToArray();
 
 			if (transaction != null)
 				ExecuteSqlNonQueryCommands(transaction, command);
@@ -304,9 +310,9 @@ namespace WebVella.Erp.Web.Repositories
 			command.Parameters.Add(new NpgsqlParameter("@weight", weight));
 
 			if (access != null && access.Count > 0)
-				command.Parameters.Add("@access", NpgsqlDbType.Array | NpgsqlDbType.Uuid).Value = access.ToArray();
+				command.Parameters.Add("@access", (NpgsqlTypes.NpgsqlDbType)(NpgsqlDbType.Array | NpgsqlDbType.Uuid)).Value = access.ToArray();
 			else
-				command.Parameters.Add("@access", NpgsqlDbType.Array | NpgsqlDbType.Uuid).Value = new List<Guid>().ToArray();
+				command.Parameters.Add("@access", (NpgsqlTypes.NpgsqlDbType)(NpgsqlDbType.Array | NpgsqlDbType.Uuid)).Value = new List<Guid>().ToArray();
 
 			if (transaction != null)
 				ExecuteSqlNonQueryCommands(transaction, command);

@@ -221,9 +221,10 @@ namespace WebVella.Erp.Web.Components
 					var dataSourceOptions = new List<SelectOption>();
 					dynamic optionsResult = context.DataModel.GetPropertyValueByDataSource(options.Options);
 					if (optionsResult == null) { }
-					if (optionsResult is List<SelectOption>)
+					dataSourceOptions = optionsResult as List<SelectOption>;
+					if (dataSourceOptions!=null)
 					{
-						dataSourceOptions = (List<SelectOption>)optionsResult;
+						
 					}
 					else if (optionsResult is string)
 					{

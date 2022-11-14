@@ -111,9 +111,10 @@ namespace WebVella.Erp.Plugins.Next.Services
 							
 								try
 								{
-									if (currentRecord[columnNameArray[0]] is List<EntityRecord>)
+                                    var relatedRecords = currentRecord[columnNameArray[0]] as List<EntityRecord>;
+                                    if (relatedRecords != null)
 									{
-										var relatedRecords = (List<EntityRecord>)currentRecord[columnNameArray[0]];
+										
 										foreach (var relatedRecord in relatedRecords)
 										{
                                         if (relatedRecord.Properties.ContainsKey(columnNameArray[1]) && relatedRecord[columnNameArray[1]] != null)

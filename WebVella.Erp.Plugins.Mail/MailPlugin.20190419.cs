@@ -13,7 +13,7 @@ namespace WebVella.Erp.Plugins.Mail
 {
 	public partial class MailPlugin : ErpPlugin
 	{
-		private static void Patch20190419(EntityManager entMan, EntityRelationManager relMan, RecordManager recMan)
+		private static void Patch20190419(EntityManager entMan, RecordManager recMan)
 		{
 			#region << ***Create field***  Entity: email Field Name: sender >>
 			{
@@ -278,7 +278,7 @@ namespace WebVella.Erp.Plugins.Mail
 				var url = "/sdk/access/user/l/list";
 				var iconClass = "fa fa-user";
 				var weight = 1;
-				var type = ((int)3);
+				var type = 3;
 				var access = new List<Guid>();
 				var entityListPages = new List<Guid>();
 				var entityCreatePages = new List<Guid>();

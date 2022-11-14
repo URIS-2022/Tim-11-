@@ -92,7 +92,7 @@ namespace WebVella.Erp.Plugins.Project.Services
 
 		public EntityRecord GetTask(Guid taskId)
 		{
-			var projectRecord = new EntityRecord();
+			
 			var eqlCommand = " SELECT * from task WHERE id = @taskId";
 			var eqlParams = new List<EqlParameter>() { new EqlParameter("taskId", taskId) };
 
@@ -360,9 +360,8 @@ namespace WebVella.Erp.Plugins.Project.Services
 						watchers.Add(userId);
 				}
 			}
-			if (projectOwnerId != null)
+			if (projectOwnerId != null && !watchers.Contains(projectOwnerId.Value))
 			{
-				if (!watchers.Contains(projectOwnerId.Value))
 					watchers.Add(projectOwnerId.Value);
 			}
 
