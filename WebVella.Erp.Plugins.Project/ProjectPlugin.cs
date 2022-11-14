@@ -32,8 +32,16 @@ namespace WebVella.Erp.Plugins.Project
 
 		private static void StackAdd()
 		{
-            DateTime utcNow = DateTime.UtcNow;
 
+            StackAdd1();
+
+
+        }
+
+        private static void StackAdd1()
+        {
+            DateTime utcNow = DateTime.UtcNow;
+            
             #region << StartTasksOnStartDate >>
             {
                 Guid checkBotSchedulePlanId = new Guid("6765D758-FB63-478F-B714-5B153AB9A758");
