@@ -10,7 +10,7 @@ namespace WebVella.Erp.Plugins.Mail.Api.AutoMapper
 {
 	public class MailPluginAutoMapperConfiguration
 	{
-		public static MapperConfigurationExpression MappingExpressions = new MapperConfigurationExpression();
+		public static readonly MapperConfigurationExpression MappingExpressions = new MapperConfigurationExpression();
 
 		private static object lockObj = new object();
 		private static bool alreadyConfigured = false;

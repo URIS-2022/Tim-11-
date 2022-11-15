@@ -2,7 +2,7 @@
 
 	var WvPageSelectionTree = "{{PageSelectionTreeJson}}";
 
-	function WvAdminSitemap() {
+    function WvAdminSitemap() {
 		var WvAdminSitemapSelectors = {};
 		WvAdminSitemapSelectors.typeSelect = "#input-{{typeOptionsFieldId}}";
 		WvAdminSitemapSelectors.appSelect = "#input-{{appOptionsFieldId}}";

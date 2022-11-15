@@ -40,7 +40,7 @@ namespace WebVella.Erp.Plugins.Mail
 				{
 					var response = entMan.CreateField(new Guid("085e2442-820a-4df7-ab92-516ce23197c4"), textboxField, false);
 					if (!response.Success)
-						throw new Exception("System error 10060. Entity: email Field: sender Message:" + response.Message);
+						throw new ArgumentNullException("System error 10060. Entity: email Field: sender Message:" + response.Message);
 				}
 			}
 			#endregion
@@ -256,7 +256,7 @@ namespace WebVella.Erp.Plugins.Mail
 				var url = "/sdk/objects/entity/l";
 				var iconClass = "fa fa-database";
 				var weight = 4;
-				var type = 3;
+				var type = ((int)3);
 				var access = new List<Guid>();
 				var entityListPages = new List<Guid>();
 				var entityCreatePages = new List<Guid>();
@@ -300,7 +300,7 @@ namespace WebVella.Erp.Plugins.Mail
 				var url = "/sdk/server/job/l/plan";
 				var iconClass = "fa fa-cogs";
 				var weight = 1;
-				var type = ((int)3);
+				var type = 3;
 				var access = new List<Guid>();
 				var entityListPages = new List<Guid>();
 				var entityCreatePages = new List<Guid>();

@@ -155,6 +155,7 @@ namespace WebVella.Erp.Web.Components
 						model.Value = valueObj as DateTime?;
 					else if(valueObj is string && DateTime.TryParse(valueObj as string, out DateTime outDateTime))
 					{
+						if(DateTime.TryParse(valueObj as string,out DateTime outdateTime))
 							model.Value = outDateTime.ConvertToAppDate();					
 					}
 

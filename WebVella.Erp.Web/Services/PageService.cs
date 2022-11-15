@@ -23,7 +23,7 @@ namespace WebVella.Erp.Web.Services
 {
 	public class PageService : BaseService
 	{
-		private string connectionString = ErpSettings.ConnectionString;
+		private readonly string connectionString = ErpSettings.ConnectionString;
 		const string CACHE_KEY = "WebVella.Erp.Web.Services.PageService-ALL-PAGES";
 
 		public PageService(string conString = null)
@@ -120,12 +120,12 @@ namespace WebVella.Erp.Web.Services
 			{
 				foreach (var node in area.Nodes)
 				{
-					if (node.Type == SitemapNodeType.EntityList)
+					if (node.Type == SitemapNodeType.EntityList && node.EntityId==null)
 					{
-						if (node.EntityId == null)
-						{
-							throw new ValidationException() { Message = "Node from type SitemapNodeType.EntityList should have an EntityId" };
-						}
+						
+						
+						throw new ValidationException() { Message = "Node from type SitemapNodeType.EntityList should have an EntityId" };
+						
 						if (!addedEntitiesHashSet.Contains(node.EntityId ?? Guid.Empty))
 						{
 							addedEntitiesHashSet.Add(node.EntityId ?? Guid.Empty);

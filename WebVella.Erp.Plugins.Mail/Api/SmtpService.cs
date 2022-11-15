@@ -11,6 +11,8 @@ using HtmlAgilityPack;
 using System.IO;
 using WebVella.Erp.Database;
 using Microsoft.AspNetCore.StaticFiles;
+using System.Net.Security;
+using System.Net;
 
 namespace WebVella.Erp.Plugins.Mail.Api
 {
@@ -142,7 +144,16 @@ namespace WebVella.Erp.Plugins.Mail.Api
 			using (var client = new SmtpClient())
 			{
 				//accept all SSL certificates (in case the server supports STARTTLS)
-				client.ServerCertificateValidationCallback = (s, c, h, e) => true;
+				client.ServerCertificateValidationCallback = (s, c, h, e) =>
+				{
+                    if (e == SslPolicyErrors.None)
+                        return true;
+
+                    Console.WriteLine("Certificate error: {0}", e);
+
+                    // Do not allow this client to communicate with unauthenticated servers.
+                    return false;
+                } ;
 
 				client.Connect(Server, Port, ConnectionSecurity);
 
@@ -285,7 +296,16 @@ namespace WebVella.Erp.Plugins.Mail.Api
 			using (var client = new SmtpClient())
 			{
 				//accept all SSL certificates (in case the server supports STARTTLS)
-				client.ServerCertificateValidationCallback = (s, c, h, e) => true;
+				client.ServerCertificateValidationCallback = (s, c, h, e) =>
+				{
+					if (e == SslPolicyErrors.None)
+						return true;
+
+					Console.WriteLine("Certificate error: {0}", e);
+
+					// Do not allow this client to communicate with unauthenticated servers.
+					return false;
+				} ;
 
 				client.Connect(Server, Port, ConnectionSecurity);
 
@@ -329,7 +349,7 @@ namespace WebVella.Erp.Plugins.Mail.Api
 
 					var file = fsRepository.Find(filepath);
 					if (file == null)
-						throw new Exception($"Attachment file '{filepath}' not found.");
+						throw new Exception("Attachment file not found.");
 
 					email.Attachments.Add(filepath);
 				}
@@ -414,7 +434,16 @@ namespace WebVella.Erp.Plugins.Mail.Api
 			using (var client = new SmtpClient())
 			{
 				//accept all SSL certificates (in case the server supports STARTTLS)
-				client.ServerCertificateValidationCallback = (s, c, h, e) => true;
+				client.ServerCertificateValidationCallback = (s, c, h, e) =>
+				{
+					if (e == SslPolicyErrors.None)
+						return true;
+
+					Console.WriteLine("Certificate error: {0}", e);
+
+					// Do not allow this client to communicate with unauthenticated servers.
+					return false;
+				} ;
 
 				client.Connect(Server, Port, ConnectionSecurity);
 
@@ -458,7 +487,7 @@ namespace WebVella.Erp.Plugins.Mail.Api
 
 					var file = fsRepository.Find(filepath);
 					if (file == null)
-						throw new Exception($"Attachment file '{filepath}' not found.");
+						throw new Exception("Attachment file not found.");
 
 					email.Attachments.Add(filepath);
 				}
@@ -500,9 +529,12 @@ namespace WebVella.Erp.Plugins.Mail.Api
 				message.From.Add(new MailboxAddress(sender.Name, sender.Address));
 			else
 				message.From.Add(new MailboxAddress(sender.Address, sender.Address));
-
-			foreach (var recipient in recipients)
-			{
+            if ((recipients?.Count ?? 0) == 0)
+            {
+                return;
+            }
+            foreach (var recipient in recipients)
+			{	
 				if (!string.IsNullOrWhiteSpace(recipient.Name))
 					message.To.Add(new MailboxAddress(recipient.Name, recipient.Address));
 				else
@@ -556,7 +588,16 @@ namespace WebVella.Erp.Plugins.Mail.Api
 			using (var client = new SmtpClient())
 			{
 				//accept all SSL certificates (in case the server supports STARTTLS)
-				client.ServerCertificateValidationCallback = (s, c, h, e) => true;
+				client.ServerCertificateValidationCallback = (s, c, h, e) =>
+				{
+					if (e == SslPolicyErrors.None)
+						return true;
+
+					Console.WriteLine("Certificate error: {0}", e);
+
+					// Do not allow this client to communicate with unauthenticated servers.
+					return false;
+				} ;
 
 				client.Connect(Server, Port, ConnectionSecurity);
 
@@ -844,7 +885,7 @@ namespace WebVella.Erp.Plugins.Mail.Api
 
 					var file = fsRepository.Find(filepath);
 					if (file == null)
-						throw new ArgumentNullException($"Attachment file '{filepath}' not found.");
+						throw new Exception($"Attachment file '{filepath}' not found.");
 
 					email.Attachments.Add(filepath);
 				}
@@ -935,7 +976,7 @@ namespace WebVella.Erp.Plugins.Mail.Api
 
 					var file = fsRepository.Find(filepath);
 					if (file == null)
-						throw new Exception($"Attachment file '{filepath}' not found.");
+						throw new Exception("Attachment file not found.");
 
 					email.Attachments.Add(filepath);
 				}

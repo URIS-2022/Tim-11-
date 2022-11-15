@@ -17,7 +17,7 @@ namespace WebVella.Erp.Exceptions
 		{
 		}
 
-		public ValidationException(string message, Exception inner = null) : base(message, inner)
+		public ValidationException(string message = null, Exception inner = null) : base(message, inner)
 		{
 			Message = message;
 			Errors = new List<ValidationError>();

@@ -19,7 +19,7 @@ namespace WebVella.Erp.Plugins.Project.Controllers
 	{
 		private const char RELATION_SEPARATOR = '.';
 		private const char RELATION_NAME_RESULT_SEPARATOR = '$';
-
+		
 		RecordManager recMan;
 		EntityManager entMan;
 		EntityRelationManager relMan;

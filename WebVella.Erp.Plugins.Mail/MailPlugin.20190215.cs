@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Text;
 using System.Text;
 using WebVella.Erp.Api;
 using WebVella.Erp.Api.Models;
+using WebVella.Erp.Database;
 using WebVella.Erp.Web.Models;
 
 namespace WebVella.Erp.Plugins.Mail
@@ -43,11 +45,16 @@ namespace WebVella.Erp.Plugins.Mail
 					//DELETE
 					entity.RecordPermissions.CanDelete.Add(new Guid("f16ec6db-626d-4c27-8de0-3e7ce542c55f"));
 					entity.RecordPermissions.CanDelete.Add(new Guid("bdc56420-caf0-4030-8a0e-d264938e0cda"));
-					{
-						var response = entMan.CreateEntity(entity, systemFieldIdDictionary);
-						if (!response.Success)
+                    void response1()
+                    {
+                        {
+                            var response = entMan.CreateEntity(entity, systemFieldIdDictionary);
+                            if (!response.Success)
 							throw new Exception("System error 10050. Entity: email creation Message: " + response.Message);
-					}
+                        }
+                    }
+                    response1();
+					
 				}
 				#endregion
 			}
@@ -74,12 +81,14 @@ namespace WebVella.Erp.Plugins.Mail
 				textboxField.Permissions.CanRead = new List<Guid>();
 				textboxField.Permissions.CanUpdate = new List<Guid>();
 				//READ
-				//UPDATE
+				//UPDATE	
+				void update2()
 				{
 					var response = entMan.CreateField(new Guid("085e2442-820a-4df7-ab92-516ce23197c4"), textboxField, false);
 					if (!response.Success)
 						throw new Exception("System error 10060. Entity: email Field: subject Message:" + response.Message);
 				}
+				update2();
 			}
 			#endregion
 
@@ -106,14 +115,15 @@ namespace WebVella.Erp.Plugins.Mail
 				//READ
 				//UPDATE
 				{
-					var response = entMan.CreateField(new Guid("085e2442-820a-4df7-ab92-516ce23197c4"), textboxField, false);
-					if (!response.Success)
+                        var response = entMan.CreateField(new Guid("085e2442-820a-4df7-ab92-516ce23197c4"), textboxField, false);
+                        if (!response.Success)
 						throw new Exception("System error 10060. Entity: email Field: content_text Message:" + response.Message);
-				}
+                }
 			}
 			#endregion
 
 			#region << ***Create field***  Entity: email Field Name: content_html >>
+			void createField()
 			{
 				InputHtmlField htmlField = new InputHtmlField();
 				htmlField.Id = new Guid("e1fd62b4-5630-4974-8ddf-0324f3d965e9");
@@ -140,9 +150,11 @@ namespace WebVella.Erp.Plugins.Mail
 						throw new Exception("System error 10060. Entity: email Field: content_html Message:" + response.Message);
 				}
 			}
+			createField();
 			#endregion
 
 			#region << ***Create field***  Entity: email Field Name: sent_on >>
+			void createField2()
 			{
 				InputDateTimeField datetimeField = new InputDateTimeField();
 				datetimeField.Id = new Guid("2adbf0ae-1701-4a07-8e2f-82be6740bb7a");
@@ -165,15 +177,19 @@ namespace WebVella.Erp.Plugins.Mail
 				datetimeField.Permissions.CanUpdate = new List<Guid>();
 				//READ
 				//UPDATE
+				void res()
 				{
 					var response = entMan.CreateField(new Guid("085e2442-820a-4df7-ab92-516ce23197c4"), datetimeField, false);
 					if (!response.Success)
 						throw new Exception("System error 10060. Entity: email Field: sent_on Message:" + response.Message);
 				}
+				res();
 			}
+			createField2();
 			#endregion
 
 			#region << ***Create field***  Entity: email Field Name: created_on >>
+			void createField3()
 			{
 				InputDateTimeField datetimeField = new InputDateTimeField();
 				datetimeField.Id = new Guid("cf69678d-6447-4e2f-9e83-ccc9b5fa610f");
@@ -196,12 +212,15 @@ namespace WebVella.Erp.Plugins.Mail
 				datetimeField.Permissions.CanUpdate = new List<Guid>();
 				//READ
 				//UPDATE
+				void update3()
 				{
 					var response = entMan.CreateField(new Guid("085e2442-820a-4df7-ab92-516ce23197c4"), datetimeField, false);
 					if (!response.Success)
 						throw new Exception("System error 10060. Entity: email Field: created_on Message:" + response.Message);
 				}
+				update3();
 			}
+			createField3();
 			#endregion
 
 			#region << ***Create field***  Entity: email Field Name: server_error >>
@@ -5495,5 +5514,7 @@ OFFSET 0
 
 
 		}
+
+		
 	}
 }

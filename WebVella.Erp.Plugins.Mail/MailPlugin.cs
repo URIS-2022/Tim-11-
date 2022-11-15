@@ -25,12 +25,7 @@ namespace WebVella.Erp.Plugins.Mail
 			}
 		}
 
-		//public override IEnumerable<Type> GetJobTypes()
-		//{
-		//	var list = new List<Type>();
-		//	list.Add( typeof(ProcessSmtpQueueJob) );
-		//	return list;
-		//}
+
 
 		public override void SetAutoMapperConfiguration(MapperConfigurationExpression cfg)
 		{
@@ -38,7 +33,7 @@ namespace WebVella.Erp.Plugins.Mail
 			base.SetAutoMapperConfiguration(cfg);
 		}
 
-		private void SetSchedulePlans()
+		private static void SetSchedulePlans()
 		{
 			DateTime utcNow = DateTime.UtcNow;
 

@@ -67,6 +67,7 @@ namespace WebVella.Erp.Plugins.Mail
 								}
 								catch (ValidationException ex)
 								{
+									var exception = ex;
 									throw ex;
 								}
 								catch (Exception)
@@ -194,6 +195,7 @@ namespace WebVella.Erp.Plugins.Mail
 								}
 								catch (ValidationException ex)
 								{
+									var exception = ex;
 									throw ex;
 								}
 								catch (Exception)

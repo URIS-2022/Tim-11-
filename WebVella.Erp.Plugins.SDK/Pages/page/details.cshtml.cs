@@ -93,7 +93,7 @@ namespace WebVella.Erp.Plugins.SDK.Pages.Page
 			if (app != null && app.Access != null && app.Access.Count > 0)
 			{
 				
-                Access = app.Access.Select(x => x.ToString()).ToList();
+					Access = app.Access.Select(x => x.ToString()).ToList();
 
 			}
 			#endregion
