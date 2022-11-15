@@ -1,9 +1,9 @@
 ﻿$(function () {
 
-    let WvPageSelectionTree = "{{PageSelectionTreeJson}}";
+	var WvPageSelectionTree = "{{PageSelectionTreeJson}}";
 
     function WvAdminSitemap() {
-        let WvAdminSitemapSelectors = {};
+		var WvAdminSitemapSelectors = {};
 		WvAdminSitemapSelectors.typeSelect = "#input-{{typeOptionsFieldId}}";
 		WvAdminSitemapSelectors.appSelect = "#input-{{appOptionsFieldId}}";
 		WvAdminSitemapSelectors.areaSelect = "#input-{{areaOptionsFieldId}}";
@@ -14,7 +14,7 @@
 		return WvAdminSitemapSelectors;
 	}
 
-	let WvAdminSitemapSelectors = WvAdminSitemap();
+	var WvAdminSitemapSelectors = WvAdminSitemap();
 
 	var selectInitObject = {
 		theme: 'bootstrap4',

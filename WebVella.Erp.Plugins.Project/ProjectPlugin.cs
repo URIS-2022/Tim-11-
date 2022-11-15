@@ -23,6 +23,11 @@ namespace WebVella.Erp.Plugins.Project
 		}
 
 		//public override IEnumerable<Type> GetJobTypes()
+		//{
+		//	List<Type> jobTypes = new List<Type>();
+		//	jobTypes.Add(typeof(StartTasksOnStartDate));
+		//	return jobTypes;
+		//}
 
 
 		public static void SetSchedulePlans()
@@ -89,7 +94,7 @@ namespace WebVella.Erp.Plugins.Project
                 ScheduleManager.Current.CreateSchedulePlan(checkBotSchedulePlan);
             }
 
-            #endregion
+			#endregion
         }
     }
 }

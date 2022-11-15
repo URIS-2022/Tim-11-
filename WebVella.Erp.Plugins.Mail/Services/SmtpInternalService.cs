@@ -31,7 +31,7 @@ namespace WebVella.Erp.Plugins.Mail.Services
 
 		#region <--- Hooks Logic --->
 
-		public static void ValidatePreCreateRecord(EntityRecord rec, List<ErrorModel> errors)
+		public void ValidatePreCreateRecord(EntityRecord rec, List<ErrorModel> errors)
 		{
 			foreach (var prop in rec.Properties)
 			{

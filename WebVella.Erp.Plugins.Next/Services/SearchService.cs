@@ -151,9 +151,9 @@ namespace WebVella.Erp.Plugins.Next.Services
 									//Do nothing
 								}
 							
-						}
-					}
-				}
+					    }
+				    }
+			    }
 			}
 			else {
 				//Do nothing, the eql should find a record if all is OK
@@ -164,11 +164,11 @@ namespace WebVella.Erp.Plugins.Next.Services
 			patchRecord["x_search"] = searchIndex;
 			var updateRecordResult = new RecordManager(executeHooks: false).UpdateRecord(entityName, patchRecord);
 			if (!updateRecordResult.Success) {
-				throw new ValidationException()
-				{
-					Message = updateRecordResult.Message,
-					Errors = updateRecordResult.Errors.MapTo<ValidationError>()
-				};
+                throw new ValidationException()
+                {
+                    Message = updateRecordResult.Message,
+                    Errors = updateRecordResult.Errors.MapTo<ValidationError>()
+                };
 			}
 
 		}

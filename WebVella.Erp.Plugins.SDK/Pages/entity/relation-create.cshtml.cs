@@ -118,11 +118,11 @@ namespace WebVella.Erp.Plugins.SDK.Pages.ErpEntity
 
 			try
 			{
-				if (String.IsNullOrWhiteSpace(Origin) || !Origin.Contains('$'))
+				if (String.IsNullOrWhiteSpace(Origin) || !Origin.Contains("$"))
 				{
 					throw new ValidationException("Origin field is required!");
 				}
-				if (String.IsNullOrWhiteSpace(Target) || !Target.Contains('$'))
+				if (String.IsNullOrWhiteSpace(Target) || !Target.Contains("$"))
 				{
 					throw new ValidationException("Target field is required!");
 				}

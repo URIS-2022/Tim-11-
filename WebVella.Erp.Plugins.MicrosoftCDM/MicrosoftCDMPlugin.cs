@@ -11,7 +11,7 @@ namespace WebVella.Erp.Plugins.MicrosoftCDM
 		[JsonProperty(PropertyName = "name")]
 		public override string Name { get; protected set; } = "MicrosoftCDMPlugin";
 
-		public override void Initialize(IServiceProvider ServiceProvider)
+		public override void Initialize(IServiceProvider serviceProvider)
 		{
 			using (var ctx = SecurityContext.OpenSystemScope())
 			{

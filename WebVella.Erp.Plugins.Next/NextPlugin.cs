@@ -10,7 +10,7 @@ namespace WebVella.Erp.Plugins.Next
 		[JsonProperty(PropertyName = "name")]
 		public override string Name { get; protected set; } = "next";
 
-		public override void Initialize(IServiceProvider serviceProvider)
+		public override void Initialize(IServiceProvider ServiceProvider)
 		{
 			using (var ctx = SecurityContext.OpenSystemScope())
 			{

@@ -13,7 +13,7 @@ namespace WebVella.Erp.Plugins.Mail
 {
 	public partial class MailPlugin : ErpPlugin
 	{
-		private static void Patch20190420(EntityManager entMan)
+		private static void Patch20190420(EntityManager entMan, EntityRelationManager relMan, RecordManager recMan)
 		{
 			#region << ***Update page body node*** Page: all_emails ID: 60a62365-f290-421e-af82-30bbd6474ea9 >>
 			{

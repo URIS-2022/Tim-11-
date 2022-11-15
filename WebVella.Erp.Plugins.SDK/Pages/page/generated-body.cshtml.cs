@@ -67,7 +67,7 @@ namespace WebVella.Erp.Plugins.SDK.Pages.Page
 			{
 				if (component.Description.Length >= 120)
 				{
-					component.Description = string.Concat(component.Description.AsSpan(0, 120) , "...");
+					component.Description = component.Description.Substring(0, 120) + "...";
 				}
 				//Apply component Usage
 				var userUsage = CurrentUser.Preferences.ComponentUsage.FirstOrDefault(x => x.Name == component.Name);

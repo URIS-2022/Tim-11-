@@ -53,8 +53,8 @@ namespace WebVella.Erp.Web.Models.AutoMapper.Profiles
 			rec["default_sender_email"] = model.DefaultSenderEmail;
 			rec["default_sender_name"] = model.DefaultSenderName;
 			rec["default_reply_to_email"] = model.DefaultReplyToEmail;
-			rec["max_retries_count"] = (decimal)(model.MaxRetriesCount);
-			rec["retry_wait_minutes"] = (decimal)(model.RetryWaitMinutes);
+			rec["max_retries_count"] = (decimal)((int)model.MaxRetriesCount);
+			rec["retry_wait_minutes"] = (decimal)((int)model.RetryWaitMinutes);
 			rec["is_default"] = model.IsDefault;
 			rec["is_enabled"] = model.IsEnabled;
 			rec["connection_security"] = ((int)model.ConnectionSecurity).ToString();

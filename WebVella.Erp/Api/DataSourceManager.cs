@@ -301,7 +301,7 @@ namespace WebVella.Erp.Api
 			foreach (var line in parameters.Split("\n", StringSplitOptions.RemoveEmptyEntries))
 			{
 				var parts = line.Replace("\r", "").Split(",", StringSplitOptions.RemoveEmptyEntries);
-				if (parts.Count() < 3 || parts.Count() > 4)
+				if (parts.Length < 3 || parts.Length > 4)
 					throw new Exception("Invalid parameter description: " + line);
 
 				DataSourceParameter dsPar = new DataSourceParameter();

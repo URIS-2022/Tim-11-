@@ -90,13 +90,10 @@ namespace WebVella.Erp.Plugins.SDK.Pages.Page
 			#region << Init App >>
 			var appServ = new AppService();
 			var app = appServ.GetApplication(ErpPage.AppId ?? Guid.Empty);
-			if (app != null)
+			if (app != null && app.Access != null && app.Access.Count > 0)
 			{
-				if (app.Access != null && app.Access.Count > 0)
-				{
+				
 					Access = app.Access.Select(x => x.ToString()).ToList();
-				}
-
 			}
 			#endregion
 

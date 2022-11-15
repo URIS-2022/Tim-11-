@@ -16,7 +16,7 @@ namespace WebVella.Erp.Plugins.Mail.Hooks.Api
 
 		public void OnPreCreateRecord(string entityName, EntityRecord record, List<ErrorModel> errors)
 		{
-			smtpIntService.ValidatePreUpdateRecord(record, errors);
+			smtpIntService.ValidatePreCreateRecord(record, errors);
 			if (errors.Any())
 				return;
 			smtpIntService.HandleDefaultServiceSetup(record,errors);

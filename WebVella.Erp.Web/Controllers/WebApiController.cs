@@ -121,10 +121,10 @@ namespace WebVella.Erp.Web.Controllers
 					case "parameters":
 						var jParams = (JArray)prop.Value;
 						model.Parameters = new List<EqlParameter>();
-						foreach (JObject jParam in jParams)
+						foreach (JObject jToken in jParams)
 						{
-							var name = jParam["name"].ToString();
-							var value = jParam["value"].ToString();
+							var name = jToken["name"].ToString();
+							var value = jToken["value"].ToString();
 							var eqlParam = new EqlParameter(name, value);
 							model.Parameters.Add(eqlParam);
 						}

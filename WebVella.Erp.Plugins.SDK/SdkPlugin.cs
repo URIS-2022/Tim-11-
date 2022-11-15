@@ -12,7 +12,7 @@ namespace WebVella.Erp.Plugins.SDK
 		[JsonProperty(PropertyName = "name")]
 		public override string Name { get; protected set; } = "sdk";
 
-		public override void Initialize(IServiceProvider ServiceProvider)
+		public override void Initialize(IServiceProvider serviceProvider)
 		{
 			using (var ctx = SecurityContext.OpenSystemScope())
 			{
@@ -29,7 +29,7 @@ namespace WebVella.Erp.Plugins.SDK
 		//	return jobTypes;
 		//}
 
-		public void SetSchedulePlans() {
+		public static void SetSchedulePlans() {
 			DateTime utcNow = DateTime.UtcNow;
 
 			#region << Sample Job Plan >>
