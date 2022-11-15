@@ -12,7 +12,7 @@ namespace WebVella.Erp.Web.Pages.Dev
 
 		public void OnGet()
 		{
-			
+			throw new NotSupportedException();
 		}
 
 	}
