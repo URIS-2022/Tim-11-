@@ -386,7 +386,7 @@ namespace WebVella.Erp.Plugins.Mail.Services
 			}
 		}
 
-		public IActionResult TestSmtpServiceOnPost(RecordDetailsPageModel pageModel)
+		public  IActionResult TestSmtpServiceOnPost(RecordDetailsPageModel pageModel)
 		{
 			SmtpService smtpService = null;
 			string recipientEmail = string.Empty;

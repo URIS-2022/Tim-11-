@@ -39,7 +39,7 @@ namespace WebVella.Erp.Plugins.Mail.Api
 			cache.Set(key, obj, options);
 		}
 
-		private static object GetObjectFromCache(string key)
+		private  object GetObjectFromCache(string key)
 		{
 			object result = null;
 

@@ -34,7 +34,6 @@ namespace WebVella.Erp.Plugins.Mail
 						//The default place for the plugin data is the "plugin_data" entity -> the "data" text field, which is used to store stringified JSON
 						//containing the plugin settings or version
 
-						//TODO: Develop a way to check for installed plugins
 						#region << 1.Get the current ERP database version and checks for other plugin dependencies >>
 
 						if (systemSettings.Version > 0)
