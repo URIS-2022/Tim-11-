@@ -357,7 +357,7 @@ namespace WebVella.Erp.Plugins.Mail.Services
 
 		public void HandleDefaultServiceSetup(EntityRecord rec, List<ErrorModel> errors)
 		{
-			if (rec.Properties.ContainsKey("is_default") && (bool)rec["is_default"]==true)
+			if (rec.Properties.ContainsKey("is_default") && (bool)rec["is_default"])
 			{
 
 				var recMan = new RecordManager(executeHooks: false);
@@ -371,7 +371,7 @@ namespace WebVella.Erp.Plugins.Mail.Services
 					}
 				}
 			}
-			else if (rec.Properties.ContainsKey("is_default") && (bool)rec["is_default"])
+			else
 			{
 				var currentRecord = new EqlCommand("SELECT * FROM smtp_service WHERE id = @id", new EqlParameter("id", rec["id"])).Execute();
 				if (currentRecord.Count > 0 && (bool)currentRecord[0]["is_default"])

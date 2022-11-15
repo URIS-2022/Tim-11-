@@ -19,7 +19,7 @@ namespace WebVella.Erp.Plugins.Next.Services
 			var entities = new EntityManager().ReadEntities().Object;
 			var currentEntity = entities.FirstOrDefault(x => x.Name == entityName);
 			if (currentEntity == null)
-				throw new Exception($"Search index generation failed: Entity {entityName} not found");
+				throw new ArgumentNullException($"Search index generation failed: Entity {entityName} not found");
 
 			// Generate request columns
 			var requestColumns = new List<string>();
@@ -88,8 +88,12 @@ namespace WebVella.Erp.Plugins.Next.Services
 							{
 								var stringValue = GetStringValue(columnName,currentEntity,currentRecord);
 
-								if (!String.IsNullOrWhiteSpace(stringValue))
-									searchIndex += stringValue + " ";
+                                StringBuilder bld = new StringBuilder();
+                                if (!String.IsNullOrWhiteSpace(stringValue))
+                                {
+                                    bld.Append(stringValue);
+                                }
+
 							}
 							catch
 							{
@@ -101,10 +105,10 @@ namespace WebVella.Erp.Plugins.Next.Services
 					{
 						//Related record column
 						var columnNameArray = columnName.Split(".", StringSplitOptions.RemoveEmptyEntries);
-						if (columnNameArray.Length == 2)
+						if (columnNameArray.Length == 2 && currentRecord.Properties.ContainsKey(columnNameArray[0]) && currentRecord[columnNameArray[0]] != null)
 						{
-							if (currentRecord.Properties.ContainsKey(columnNameArray[0]) && currentRecord[columnNameArray[0]] != null)
-							{
+							
+							
 								try
 								{
 									if (currentRecord[columnNameArray[0]] is List<EntityRecord>)
@@ -112,14 +116,20 @@ namespace WebVella.Erp.Plugins.Next.Services
 										var relatedRecords = (List<EntityRecord>)currentRecord[columnNameArray[0]];
 										foreach (var relatedRecord in relatedRecords)
 										{
-											if (relatedRecord.Properties.ContainsKey(columnNameArray[1]) && relatedRecord[columnNameArray[1]] != null)
-											{
-												var stringValue = relatedRecord[columnNameArray[1]].ToString();
-												if (!String.IsNullOrWhiteSpace(stringValue))
-													searchIndex += stringValue + " ";
-											}
-										}
+                                        if (relatedRecord.Properties.ContainsKey(columnNameArray[1]) && relatedRecord[columnNameArray[1]] != null)
+                                        {
+                                            var stringValue = relatedRecord[columnNameArray[1]].ToString();
+
+                                            StringBuilder bld = new StringBuilder();
+
+                                            if (!String.IsNullOrWhiteSpace(stringValue))
+
+                                                bld.Append(stringValue);
+                                        }
+                                        }
 									}
+									
+
 									else if (currentRecord[columnNameArray[0]] is EntityRecord)
 									{
 										var relatedRecord = (EntityRecord)currentRecord[columnNameArray[0]];
@@ -127,8 +137,12 @@ namespace WebVella.Erp.Plugins.Next.Services
 										if (relatedRecord.Properties.ContainsKey(columnNameArray[1]) && relatedRecord[columnNameArray[1]] != null)
 										{
 											var stringValue = relatedRecord[columnNameArray[1]].ToString();
-											if (!String.IsNullOrWhiteSpace(stringValue))
-												searchIndex += stringValue + " ";
+
+                                            StringBuilder bld = new StringBuilder();
+                                        if (!String.IsNullOrWhiteSpace(stringValue))
+                                        {
+                                            bld.Append(stringValue);
+                                        }
 										}
 									}
 								}
@@ -136,7 +150,7 @@ namespace WebVella.Erp.Plugins.Next.Services
 								{
 									//Do nothing
 								}
-							}
+							
 						}
 					}
 				}
@@ -159,7 +173,7 @@ namespace WebVella.Erp.Plugins.Next.Services
 
 		}
 
-		private string GetStringValue(string fieldName, Entity entity, EntityRecord record) {
+		private static string GetStringValue(string fieldName, Entity entity, EntityRecord record) {
 			var stringValue = "";
 			if (!record.Properties.ContainsKey(fieldName) || record[fieldName] == null)
 				return stringValue;
@@ -215,27 +229,36 @@ namespace WebVella.Erp.Plugins.Next.Services
 						var exactMeta = (MultiSelectField)fieldMeta;
 						var values = new List<string>();
 						var fieldValue = record[fieldName];
-						if (fieldValue is List<string>)
-							values = (List<string>)fieldValue;
-						else if (fieldValue is string) {
-							var fieldValueString = (string)fieldValue;
-							if (fieldValueString.Contains(","))
-							{
-								values = fieldValueString.Split(",").ToList();
-							}
-							else {
-								values.Add(fieldValueString);
-							}
-						}
+                        if (fieldValue != null)
+                        {
+                            values = (List<string>)fieldValue;
+                        }
+                        else if (string.IsNullOrEmpty(stringValue))
+                        {
+                            var fieldValueString = (string)fieldValue;
+                            if (fieldValueString.Contains(','))
+                            {
+                                values = fieldValueString.Split(",").ToList();
+                            }
+                            else
+                            {
+                                values.Add(fieldValueString);
+                            }
+                        }
+                        else
+                            Console.WriteLine();
+                      
 						foreach (var value in values)
 						{
 							var option = exactMeta.Options.First(x => x.Value.ToLowerInvariant() == value.ToLowerInvariant());
-							if (option != null)
+                            StringBuilder bld = new StringBuilder();
+                            if (option != null)
 							{
-								stringValue += option.Label + " ";
+                                bld.Append(stringValue);
 							}
-							else {
-								stringValue += value + " ";
+							else 
+                            {
+                                bld.Append(stringValue.ToLowerInvariant());
 							}
 						}
 					}

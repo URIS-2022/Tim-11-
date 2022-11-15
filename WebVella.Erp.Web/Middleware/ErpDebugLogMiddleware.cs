@@ -6,13 +6,12 @@ namespace WebVella.Erp.Web.Middleware
 {
 	public class ErpDebugLogMiddleware
 	{
-		IErpService service;
-		RequestDelegate next;
 
-		public ErpDebugLogMiddleware(RequestDelegate next, IErpService service)
+		readonly RequestDelegate next;
+
+		public ErpDebugLogMiddleware(RequestDelegate next)
 		{
 			this.next = next;
-			this.service = service;
 		}
 
 		public async Task Invoke(HttpContext context)
