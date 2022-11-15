@@ -15,7 +15,7 @@ namespace WebVella.Erp.Api
 {
 	public class EntityManager
 	{
-		internal static object lockObj = new object();
+		internal static readonly object lockObj = new object();
 
 		private DbContext suppliedContext = null;
 		private DbContext CurrentContext

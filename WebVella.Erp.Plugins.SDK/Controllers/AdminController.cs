@@ -23,7 +23,6 @@ namespace WebVella.Erp.Plugins.SDK.Controllers
 		EntityManager entMan;
 		EntityRelationManager relMan;
 		SecurityManager secMan;
-		IErpService erpService;
 
 		public AdminController(IErpService erpService)
 		{
@@ -31,7 +30,6 @@ namespace WebVella.Erp.Plugins.SDK.Controllers
 			secMan = new SecurityManager();
 			entMan = new EntityManager();
 			relMan = new EntityRelationManager();
-			this.erpService = erpService;
 		}
 
 		#region << Data Source >>

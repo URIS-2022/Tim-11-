@@ -29,7 +29,7 @@ namespace WebVella.Erp.Plugins.SDK
 		//	return jobTypes;
 		//}
 
-		public void SetSchedulePlans() {
+		public static void SetSchedulePlans() {
 			DateTime utcNow = DateTime.UtcNow;
 
 			#region << Sample Job Plan >>

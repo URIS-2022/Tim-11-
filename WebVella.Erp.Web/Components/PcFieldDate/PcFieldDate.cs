@@ -153,9 +153,8 @@ namespace WebVella.Erp.Web.Components
 					var valueObj = context.DataModel.GetPropertyValueByDataSource(options.Value);
 					if(valueObj is DateTime)
 						model.Value = valueObj as DateTime?;
-					else if(valueObj is string)
+					else if(valueObj is string && DateTime.TryParse(valueObj as string, out DateTime outDateTime))
 					{
-						if(DateTime.TryParse(valueObj as string,out DateTime outDateTime))
 							model.Value = outDateTime.ConvertToAppDate();					
 					}
 
