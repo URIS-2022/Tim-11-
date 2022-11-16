@@ -73,14 +73,14 @@ namespace WebVella.Erp.Plugins.Project.Services
 			}
 
 			patchRecord["id"] = taskId;
-			patchRecord["key"] = projectAbbr + "-" + ((decimal)taskRecord["number"]).ToString("N0"); ;
+			patchRecord["key"] = projectAbbr + "-" + ((decimal)taskRecord["number"]).ToString("N0");
 
 			return patchRecord;
 		}
 
 		public EntityRecordList GetTaskStatuses()
 		{
-			var projectRecord = new EntityRecord();
+			
 			var eqlCommand = "SELECT * from task_status";
 			var eqlParams = new List<EqlParameter>();
 			var eqlResult = new EqlCommand(eqlCommand, eqlParams).Execute();
