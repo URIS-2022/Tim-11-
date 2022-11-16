@@ -2505,25 +2505,24 @@ $"#region << ***Create field***  Entity: {entityName} Field Name: {field.Name} >
                 response += $"\tgeometryField.PlaceholderText = null;\n";
             }
             else
-            {
-                response += $"\tgeometryField.PlaceholderText = \"{field.PlaceholderText}\";\n";
-            }
+            response += $"\tgeometryField.PlaceholderText = \"{field.PlaceholderText}\";\n";
+            
             if (field.Description == null)
             {
                 response += $"\tgeometryField.Description = null;\n";
             }
             else
-            {
-                response += $"\tgeometryField.Description = \"{field.Description}\";\n";
-            }
+            
+            response += $"\tgeometryField.Description = \"{field.Description}\";\n";
+            
             if (field.HelpText == null)
             {
                 response += $"\tgeometryField.HelpText = null;\n";
             }
             else
-            {
-                response += $"\tgeometryField.HelpText = \"{field.HelpText}\";\n";
-            }
+            
+            response += $"\tgeometryField.HelpText = \"{field.HelpText}\";\n";
+            
 
             response +=
             $"\tgeometryField.Required = {(field.Required).ToString().ToLowerInvariant()};\n" +
@@ -2538,10 +2537,10 @@ $"#region << ***Create field***  Entity: {entityName} Field Name: {field.Name} >
                     $"\tgeometryField.Format = WebVella.Erp.Api.Models.GeographyFieldFormat.{field.Format.Value};\n";
             }
             else
-            {
-                response +=
+            
+           response +=
                     $"\tgeometryField.Format = WebVella.Erp.Api.Models.GeographyFieldFormat.GeoJSON;\n";
-            }
+            
             response +=
                 $"\tgeometryField.SRID = {field.SRID};\n";
 
@@ -2550,25 +2549,25 @@ $"#region << ***Create field***  Entity: {entityName} Field Name: {field.Name} >
                 response += $"\tgeometryField.DefaultValue = null;\n";
             }
             else
-            {
-                response += $"\tgeometryField.DefaultValue = \"{field.DefaultValue}\";\n";
-            }
+            
+            response += $"\tgeometryField.DefaultValue = \"{field.DefaultValue}\";\n";
+            
             if (field.MaxLength == null)
             {
                 response += $"\tgeometryField.MaxLength = null;\n";
             }
             else
-            {
+            
                 response += $"\tgeometryField.MaxLength = Int32.Parse(\"{field.MaxLength}\");\n";
-            }
+            
             if (field.VisibleLineNumber == null)
             {
                 response += $"\tgeometryField.VisibleLineNumber = null;\n";
             }
             else
-            {
+            
                 response += $"\tgeometryField.VisibleLineNumber = Int32.Parse(\"{field.VisibleLineNumber}\");\n";
-            }
+            
             response +=
             $"\tgeometryField.EnableSecurity = {(field.EnableSecurity).ToString().ToLowerInvariant()};\n" +
             $"\tgeometryField.Permissions = new FieldPermissions();\n" +
