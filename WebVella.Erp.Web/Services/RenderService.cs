@@ -418,7 +418,7 @@ namespace WebVella.Erp.Web.Services
 						var processedIndex = currentIndex.Replace("[", "").Replace("]", "");
 						if (Int32.TryParse(processedIndex, out outInt))
 						{
-							if (processedIndexes == foundIndexes.Count())
+							if (processedIndexes == foundIndexes.Count)
 							{
 								//There are no more indexes, so this should not be a list
 								pathPropertyValue = listProperty[outInt];
