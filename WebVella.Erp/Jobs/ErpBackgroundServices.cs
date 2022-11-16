@@ -15,7 +15,7 @@ namespace WebVella.Erp.Jobs
 			await Task.FromResult(0);
 		}
 
-		public override async Task StopAsync(CancellationToken cancellatinToken)
+		public override async Task StopAsync(CancellationToken cancellationToken)
 		{
 			await Task.FromResult(0);
 		}
