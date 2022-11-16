@@ -39,7 +39,7 @@ namespace WebVella.Erp.Api.Models
 		public static QueryObject QueryEQ(string fieldName, object value)
 		{
 			if (string.IsNullOrWhiteSpace(fieldName))
-				throw new ArgumentNullException("fieldName");
+				throw new ArgumentNullException(fieldName);
 
 			return new QueryObject { QueryType = QueryType.EQ, FieldName = fieldName, FieldValue = value };
 		}
