@@ -7,7 +7,7 @@ namespace WebVella.Erp.Web.Middleware
 	public class ErpDebugLogMiddleware
 	{
 		
-		RequestDelegate next;
+		readonly RequestDelegate next;
 
 		public ErpDebugLogMiddleware(RequestDelegate next)
 		{
