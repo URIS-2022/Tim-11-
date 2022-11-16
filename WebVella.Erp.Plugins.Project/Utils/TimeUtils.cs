@@ -28,44 +28,37 @@ namespace WebVella.Erp.Plugins.Project.Utils
 				return null;
 			}
 
-			// 5.
-			// Handle same-day times.
-			if (dayDiff == 0 && secDiff<60)
+
+			if (dayDiff == 0 && secDiff < 60)
 			{
-				// A.
-				// Less than one minute ago.
+
+
+				return "just now";
+			}	
+			else if(dayDiff==0 && secDiff<120)
 				
-					return "just now";
-				
-				// B.
-				// Less than 2 minutes ago.
-				if (secDiff < 120)
-				{
+			{
 					return "1 minute ago";
-				}
-				// C.
-				// Less than one hour ago.
-				if (secDiff < 3600)
-				{
+			}
+			
+			else if (dayDiff==0 && secDiff < 3600)
+			{
 					return string.Format("{0} minutes ago",
 						Math.Floor((double)secDiff / 60));
-				}
-				// D.
-				// Less than 2 hours ago.
-				if (secDiff < 7200)
-				{
+			}
+			
+			else if (dayDiff==0 && secDiff < 7200)
+			{
 					return "1 hour ago";
-				}
-				// E.
-				// Less than one day ago.
-				if (secDiff < 86400)
-				{
+			}
+		
+			else if (dayDiff ==0 && secDiff < 86400)
+			{
 					return string.Format("{0} hours ago",
 						Math.Floor((double)secDiff / 3600));
-				}
 			}
-			// 6.
-			// Handle previous days.
+			
+			
 			if (dayDiff == 1)
 			{
 				return "yesterday";
