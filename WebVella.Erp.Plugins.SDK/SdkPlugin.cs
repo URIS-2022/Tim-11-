@@ -12,7 +12,7 @@ namespace WebVella.Erp.Plugins.SDK
 		[JsonProperty(PropertyName = "name")]
 		public override string Name { get; protected set; } = "sdk";
 
-		public override void Initialize(IServiceProvider serviceProvider)
+		public override void Initialize(IServiceProvider ServiceProvider)
 		{
 			using (var ctx = SecurityContext.OpenSystemScope())
 			{
