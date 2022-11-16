@@ -30,14 +30,13 @@ namespace WebVella.Erp.Plugins.Project.Utils
 
 			// 5.
 			// Handle same-day times.
-			if (dayDiff == 0)
+			if (dayDiff == 0 && secDiff<60)
 			{
 				// A.
 				// Less than one minute ago.
-				if (secDiff < 60)
-				{
+				
 					return "just now";
-				}
+				
 				// B.
 				// Less than 2 minutes ago.
 				if (secDiff < 120)
