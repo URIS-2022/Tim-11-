@@ -154,7 +154,7 @@ namespace WebVella.Erp.Web.Utils
 							doc.LoadHtml(InValue);
 							doc.OptionFixNestedTags = true;
 							doc.OptionAutoCloseOnEnd = true;
-							if (doc.ParseErrors != null && doc.ParseErrors.Count() > 0)
+							if (doc.ParseErrors != null && doc.ParseErrors.Any())
 							{
 								foreach (var error in doc.ParseErrors)
 								{
