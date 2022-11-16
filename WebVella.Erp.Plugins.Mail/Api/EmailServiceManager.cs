@@ -42,7 +42,7 @@ namespace WebVella.Erp.Plugins.Mail.Api
 		private static object GetObjectFromCache(string key)
 		{
 			object result = null;
-			bool found = cache.TryGetValue(key, out result);
+
 			return result;
 		}
 
