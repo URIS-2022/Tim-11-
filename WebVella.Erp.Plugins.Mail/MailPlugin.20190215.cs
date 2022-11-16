@@ -117,7 +117,7 @@ namespace WebVella.Erp.Plugins.Mail
 				{
                         var response = entMan.CreateField(new Guid("085e2442-820a-4df7-ab92-516ce23197c4"), textboxField, false);
                         if (!response.Success)
-						throw new Exception("System error 10060. Entity: email Field: content_text Message:" + response.Message);
+						throw new SystemException("System error 10060. Entity: email Field: content_text Message:" + response.Message);
                 }
 				
 			}
@@ -148,7 +148,7 @@ namespace WebVella.Erp.Plugins.Mail
 				{
 					var response = entMan.CreateField(new Guid("085e2442-820a-4df7-ab92-516ce23197c4"), htmlField, false);
 					if (!response.Success)
-						throw new Exception("System error 10060. Entity: email Field: content_html Message:" + response.Message);
+						throw new SystemException("System error 10060. Entity: email Field: content_html Message:" + response.Message);
 				}
 			}
 			createField();
@@ -442,7 +442,7 @@ namespace WebVella.Erp.Plugins.Mail
 				{
 					var response = entMan.CreateField(new Guid("085e2442-820a-4df7-ab92-516ce23197c4"), dropdownField, false);
 					if (!response.Success)
-						throw new Exception("System error 10060. Entity: email Field: status Message:" + response.Message);
+						throw new SystemException("System error 10060. Entity: email Field: status Message:" + response.Message);
 				}
 			}
 			#endregion
@@ -472,7 +472,7 @@ namespace WebVella.Erp.Plugins.Mail
 				{
 					var response = entMan.CreateField(new Guid("085e2442-820a-4df7-ab92-516ce23197c4"), textboxField, false);
 					if (!response.Success)
-						throw new Exception("System error 10060. Entity: email Field: x_search Message:" + response.Message);
+						throw new SystemException("System error 10060. Entity: email Field: x_search Message:" + response.Message);
 				}
 			}
 			#endregion
@@ -502,7 +502,7 @@ namespace WebVella.Erp.Plugins.Mail
 				{
 					var response = entMan.CreateField(new Guid("085e2442-820a-4df7-ab92-516ce23197c4"), textboxField, false);
 					if (!response.Success)
-						throw new Exception("System error 10060. Entity: email Field: recipient_name Message:" + response.Message);
+						throw new SystemException("System error 10060. Entity: email Field: recipient_name Message:" + response.Message);
 				}
 			}
 			#endregion
@@ -532,7 +532,7 @@ namespace WebVella.Erp.Plugins.Mail
 				{
 					var response = entMan.CreateField(new Guid("085e2442-820a-4df7-ab92-516ce23197c4"), textboxField, false);
 					if (!response.Success)
-						throw new Exception("System error 10060. Entity: email Field: sender_name Message:" + response.Message);
+						throw new SystemException("System error 10060. Entity: email Field: sender_name Message:" + response.Message);
 				}
 			}
 			#endregion
@@ -562,7 +562,7 @@ namespace WebVella.Erp.Plugins.Mail
 				{
 					var response = entMan.CreateField(new Guid("085e2442-820a-4df7-ab92-516ce23197c4"), emailField, false);
 					if (!response.Success)
-						throw new Exception("System error 10060. Entity: email Field: recipient_email Message:" + response.Message);
+						throw new SystemException("System error 10060. Entity: email Field: recipient_email Message:" + response.Message);
 				}
 			}
 			#endregion
@@ -1104,7 +1104,7 @@ namespace WebVella.Erp.Plugins.Mail
 				var url = "";
 				var iconClass = "";
 				var weight = 1;
-				var type = ((int)1);
+				var type = (1);
 				var access = new List<Guid>();
 				var labelTranslations = new List<WebVella.Erp.Web.Models.TranslationResource>();
 
@@ -1161,7 +1161,7 @@ namespace WebVella.Erp.Plugins.Mail
 				var system = false;
 				var layout = @"";
 				var weight = 10;
-				var type = (PageType)((int)5);
+				var type = (PageType)(5);
 				var isRazorBody = false;
 				Guid? appId = new Guid("9d3b5497-e136-43b7-ad87-857e615a54c9");
 				Guid? entityId = new Guid("17698b9f-e533-4f8d-a651-a00f7de2989e");
@@ -1183,7 +1183,7 @@ namespace WebVella.Erp.Plugins.Mail
 				var system = false;
 				var layout = @"";
 				var weight = 10;
-				var type = (PageType)((int)3);
+				var type = (PageType)(3);
 				var isRazorBody = false;
 				Guid? appId = new Guid("9d3b5497-e136-43b7-ad87-857e615a54c9");
 				Guid? entityId = new Guid("17698b9f-e533-4f8d-a651-a00f7de2989e");
@@ -1205,7 +1205,7 @@ namespace WebVella.Erp.Plugins.Mail
 				var system = false;
 				var layout = @"";
 				var weight = 10;
-				var type = (PageType)((int)3);
+				var type = (PageType)(3);
 				var isRazorBody = false;
 				Guid? appId = new Guid("9d3b5497-e136-43b7-ad87-857e615a54c9");
 				Guid? entityId = new Guid("085e2442-820a-4df7-ab92-516ce23197c4");
@@ -1249,7 +1249,7 @@ namespace WebVella.Erp.Plugins.Mail
 				var system = false;
 				var layout = @"";
 				var weight = 10;
-				var type = (PageType)((int)5);
+				var type = (PageType)(5);
 				var isRazorBody = false;
 				Guid? appId = new Guid("9d3b5497-e136-43b7-ad87-857e615a54c9");
 				Guid? entityId = new Guid("17698b9f-e533-4f8d-a651-a00f7de2989e");

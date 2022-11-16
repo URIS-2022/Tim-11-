@@ -67,7 +67,6 @@ namespace WebVella.Erp.Plugins.Mail
 								}
 								catch (ValidationException ex)
 								{
-									var exception = ex;
 									throw ex;
 								}
 								catch (Exception)
@@ -89,7 +88,7 @@ namespace WebVella.Erp.Plugins.Mail
 								}
 								catch (ValidationException ex)
 								{
-									throw ex;
+									throw;
 								}
 								catch (Exception)
 								{
@@ -110,8 +109,7 @@ namespace WebVella.Erp.Plugins.Mail
 								}
 								catch (ValidationException ex)
 								{
-									var exception = ex;
-									throw ex;
+									throw;
 								}
 								catch (Exception)
 								{
@@ -151,8 +149,7 @@ namespace WebVella.Erp.Plugins.Mail
 									Patch20190529(entMan, relMan, recMan);
 								}
 								catch (ValidationException ex)
-								{
-									var exception = ex;
+								{ 
 									throw;
 								}
 								catch (Exception)
@@ -188,21 +185,20 @@ namespace WebVella.Erp.Plugins.Mail
 							var patchVersion = 20200611;
 							if (currentPluginSettings.Version < patchVersion)
 							{
-								try
-								{
-									currentPluginSettings.Version = patchVersion;
-									Patch20200611(entMan, relMan, recMan);
-								}
-								catch (ValidationException ex)
-								{
-									var exception = ex;
-									throw ex;
-								}
-								catch (Exception)
-								{
-									throw;
-								}
-							}
+                                try
+                                {
+                                    currentPluginSettings.Version = patchVersion;
+                                    Patch20200611(entMan, relMan, recMan);
+                                }
+                                catch (ValidationException ex)
+                                {
+                                    throw ex;
+                                }
+                                catch (Exception)
+                                {
+                                    throw;
+                                }
+                            }
 						}
 
 						#endregion

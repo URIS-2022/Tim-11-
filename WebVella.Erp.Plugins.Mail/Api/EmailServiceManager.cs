@@ -76,7 +76,7 @@ namespace WebVella.Erp.Plugins.Mail.Api
 			return service;
 		}
 
-		internal SmtpService GetSmtpServiceInternal(string name = null)
+		internal static SmtpService GetSmtpServiceInternal(string name = null)
 		{
 			EntityRecord smtpServiceRec = null;
 			if (name != null)

@@ -888,10 +888,10 @@ namespace WebVella.Erp
 			}
 		}
 
-		public void InitializePlugins(IServiceProvider serviceProvider)
+		public void InitializePlugins(IServiceProvider app)
 		{
 			foreach (ErpPlugin plugin in Plugins)
-				plugin.Initialize(serviceProvider);
+				plugin.Initialize(app);
 
 			JobManager.Current.RegisterJobTypes(this);
 			HookManager.RegisterHooks(this);

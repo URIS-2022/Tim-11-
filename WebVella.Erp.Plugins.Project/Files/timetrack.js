@@ -5,7 +5,7 @@
 		recordRow.addClass("go-bkg-orange-light");
 		const timerTd = $(wvTimerEl).closest('.timer-td');
 		const alreadyLoggedSecondsEl = timerTd.find("input[name='timelog_total_seconds']");
-		const alreadyLoggedSeconds = 0;
+		let alreadyLoggedSeconds = 0;
 		if (alreadyLoggedSecondsEl && alreadyLoggedSecondsEl.val()) {
 			alreadyLoggedSeconds = alreadyLoggedSecondsEl.val();
 		}

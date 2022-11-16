@@ -16,7 +16,7 @@ namespace WebVella.Erp.Plugins.Mail.Hooks.Page
 	[HookAttachment(key: "test_smtp_service")]
 	public class TestSmtpService : IRecordDetailsPageHook
 	{
-		public IActionResult OnGet(RecordDetailsPageModel pageModel)
+		public static IActionResult OnGet(RecordDetailsPageModel pageModel)
 		{
 			return null;
 		}

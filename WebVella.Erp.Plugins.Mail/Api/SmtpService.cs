@@ -642,7 +642,7 @@ namespace WebVella.Erp.Plugins.Mail.Api
 
 					var file = fsRepository.Find(filepath);
 					if (file == null)
-						throw new Exception($"Attachment file '{filepath}' not found.");
+						throw new SystemException($"Attachment file '{filepath}' not found.");
 
 					email.Attachments.Add(filepath);
 				}
@@ -885,7 +885,7 @@ namespace WebVella.Erp.Plugins.Mail.Api
 
 					var file = fsRepository.Find(filepath);
 					if (file == null)
-						throw new Exception($"Attachment file '{filepath}' not found.");
+						throw new SystemException($"Attachment file '{filepath}' not found.");
 
 					email.Attachments.Add(filepath);
 				}
