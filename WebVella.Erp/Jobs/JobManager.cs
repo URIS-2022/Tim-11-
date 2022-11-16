@@ -225,7 +225,7 @@ namespace WebVella.Erp.Jobs
 			}
 		}
 
-		public async void ProcessJobsAsync(CancellationToken stoppingToken)
+		public async Task ProcessJobsAsync(CancellationToken stoppingToken)
 		{
 			if (!Settings.Enabled)
 				return;

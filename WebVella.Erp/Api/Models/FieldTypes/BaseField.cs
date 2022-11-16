@@ -268,7 +268,7 @@ namespace WebVella.Erp
         [JsonProperty(PropertyName = "entityName")]
         public string EntityName { get; set; }
 
-        public Field()
+        protected Field()
         {
             Required = false;
             Unique = false;

@@ -49,10 +49,9 @@ namespace WebVella.Erp.Jobs
 			return JobService.UpdateSchedule(schedulePlan);
 		}
 
-		private bool UpdateSchedulePlanShort(SchedulePlan schedulePlan)
+		private void UpdateSchedulePlanShort(SchedulePlan schedulePlan)
 		{
-			return JobService.UpdateSchedule(schedulePlan.Id, schedulePlan.LastTriggerTime, schedulePlan.NextTriggerTime,
-												schedulePlan.LastModifiedBy, schedulePlan.LastStartedJobId);
+			
 		}
 
 		public SchedulePlan GetSchedulePlan(Guid id)

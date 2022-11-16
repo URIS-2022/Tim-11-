@@ -168,7 +168,7 @@ namespace WebVella.Erp.Web.Components
 							}
 							catch
 							{
-								stringProcessed = false;
+								
 								ViewBag.ExceptionMessage = "Value Json Deserialization failed!";
 								ViewBag.Errors = new List<ValidationError>();
 								return await Task.FromResult<IViewComponentResult>(View("Error"));
