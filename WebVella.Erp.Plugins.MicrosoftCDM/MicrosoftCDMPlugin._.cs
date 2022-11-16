@@ -86,12 +86,13 @@ namespace WebVella.Erp.Plugins.MicrosoftCDM
 						SavePluginData(JsonConvert.SerializeObject(currentPluginSettings));
 
 						connection.CommitTransaction();
-						//connection.RollbackTransaction();
+						
 					}
 					catch (ValidationException ex)
 					{
 						connection.RollbackTransaction();
-						throw ex;
+						Console.WriteLine(ex);
+						throw;
 					}
 
 					catch (Exception)
