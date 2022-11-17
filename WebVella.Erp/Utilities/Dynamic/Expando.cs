@@ -150,7 +150,7 @@ namespace WebVella.Erp.Utilities.Dynamic
             result = null;
 
             // first check the Properties collection for member
-            if (Properties.Keys.Contains(binder.Name))
+            if (Properties.ContainsKey(binder.Name))
             {
                 result = Properties[binder.Name];
                 return true; 
