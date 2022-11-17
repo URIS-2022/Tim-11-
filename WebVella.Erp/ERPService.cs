@@ -934,7 +934,7 @@ namespace WebVella.Erp
 
 				if (!entitiesTableExists)
 				{
-					command = connection.CreateCommand("CREATE TABLE public.entities(  id uuid NOT NULL, \"json\"  json NOT NULL,  CONSTRAINT entities_pkey	PRIMARY KEY (id)) WITH(	OIDS = FALSE  )");
+					command = connection.CreateCommand("CREATE TABLE public.entities(  id uuid NOT NULL, \"json\"  json NOT NULL,  CONSTRAINT entities_pkey\tPRIMARY KEY (id)) WITH(	OIDS = FALSE  )");
 					command.ExecuteNonQuery();
 				}
 
