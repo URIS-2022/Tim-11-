@@ -379,33 +379,45 @@ namespace WebVella.Erp.Plugins.Mail
 			#endregion
 
 			#region << ***Delete field*** Entity: email Field Name: sender_name >>
+			void send157()
 			{
+				void name157()
 				{
 					var response = entMan.DeleteField(new Guid("085e2442-820a-4df7-ab92-516ce23197c4"), new Guid("4d9e646c-0105-4370-ad21-d6547a7cabb1"));
 					if (!response.Success)
 						throw new Exception("System error 10060. Delete field failed for Field: sender_name Entity: email. Message:" + response.Message);
 				}
+				name157();
 			}
+			send157();
 			#endregion
 
 			#region << ***Delete field*** Entity: email Field Name: recipient_email >>
+			void rec157()
 			{
+				void email157()
 				{
 					var response = entMan.DeleteField(new Guid("085e2442-820a-4df7-ab92-516ce23197c4"), new Guid("cae76d3b-bf91-47bc-aec0-d7ac26eced7b"));
 					if (!response.Success)
 						throw new Exception("System error 10060. Delete field failed for Field: recipient_email Entity: email. Message:" + response.Message);
 				}
+				email157();
 			}
+			rec157();
 			#endregion
 
 			#region << ***Delete field*** Entity: email Field Name: sender_email >>
+			void sender15()
 			{
+				void em15()
 				{
 					var response = entMan.DeleteField(new Guid("085e2442-820a-4df7-ab92-516ce23197c4"), new Guid("94845377-b845-49fe-b693-789f1ed5740e"));
 					if (!response.Success)
 						throw new Exception("System error 10060. Delete field failed for Field: sender_email Entity: email. Message:" + response.Message);
 				}
+			    em15();
 			}
+			sender15();
 			#endregion
 		}
 
