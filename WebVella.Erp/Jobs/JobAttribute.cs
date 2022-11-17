@@ -27,16 +27,10 @@ namespace WebVella.Erp.Jobs
 			get { return name; }
 		}
 
-		public virtual JobPriority DefaultPriority
-		{
-			get { return defaultPriority; }
-			set { defaultPriority = value; }
-		}
+		public virtual JobPriority DefaultPriority { get; set; }
+		
 
-		public virtual bool AllowSingleInstance
-		{
-			get { return allowSingleInstance; }
-			set { allowSingleInstance = value; }
-		}
+		public virtual bool AllowSingleInstance { get; set; }
+		
 	}
 }
