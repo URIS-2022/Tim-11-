@@ -68,7 +68,7 @@ namespace WebVella.Erp.Plugins.Project.Services
 			commentIdListForDeletion.Add(recordId);
 
 			//Find and add all the child comments
-			//TODO currently only on level if comment nesting is implemented. If it is increased this method should be changed
+			 
 			{
 				var eqlCommand = "SELECT id FROM comment WHERE parent_id = @commentId";
 				var eqlParams = new List<EqlParameter>() { new EqlParameter("commentId", recordId) };
@@ -86,7 +86,7 @@ namespace WebVella.Erp.Plugins.Project.Services
 			{
 
 				//Remove case relations
-				//TODO
+				
 
 
 				var deleteResponse = new RecordManager().DeleteRecord("comment", commentId);
