@@ -281,7 +281,7 @@ namespace WebVella.Erp.Plugins.Mail
 				{
 					var response = entMan.CreateField(new Guid("085e2442-820a-4df7-ab92-516ce23197c4"), numberField, false);
 					if (!response.Success)
-						throw new Exception("System error 10060. Entity: email Field: retries_count Message:" + response.Message);
+						throw new ArgumentException("System error 10060. Entity: email Field: retries_count Message:" + response.Message);
 				}
 			}
 			#endregion
@@ -311,7 +311,7 @@ namespace WebVella.Erp.Plugins.Mail
 				{
 					var response = entMan.CreateField(new Guid("085e2442-820a-4df7-ab92-516ce23197c4"), guidField, false);
 					if (!response.Success)
-						throw new Exception("System error 10060. Entity: email Field: service_id Message:" + response.Message);
+						throw new ArgumentException("System error 10060. Entity: email Field: service_id Message:" + response.Message);
 				}
 			}
 			#endregion
@@ -346,7 +346,7 @@ namespace WebVella.Erp.Plugins.Mail
 				{
 					var response = entMan.CreateField(new Guid("085e2442-820a-4df7-ab92-516ce23197c4"), dropdownField, false);
 					if (!response.Success)
-						throw new Exception("System error 10060. Entity: email Field: priority Message:" + response.Message);
+						throw new ArgumentException("System error 10060. Entity: email Field: priority Message:" + response.Message);
 				}
 			}
 			#endregion
@@ -376,7 +376,7 @@ namespace WebVella.Erp.Plugins.Mail
 				{
 					var response = entMan.CreateField(new Guid("085e2442-820a-4df7-ab92-516ce23197c4"), textboxField, false);
 					if (!response.Success)
-						throw new Exception("System error 10060. Entity: email Field: reply_to_email Message:" + response.Message);
+						throw new ArgumentException("System error 10060. Entity: email Field: reply_to_email Message:" + response.Message);
 				}
 			}
 			#endregion
