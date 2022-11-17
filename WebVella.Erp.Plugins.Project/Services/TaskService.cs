@@ -277,7 +277,7 @@ namespace WebVella.Erp.Plugins.Project.Services
 				var eqlCommand = "SELECT created_on,type_id,$project_nn_task.id FROM task WHERE created_by = @currentUserId ORDER BY created_on DESC PAGE 1 PAGESIZE 1";
 				var eqlParams = new List<EqlParameter>() { new EqlParameter("currentUserId", currentUser.Id) };
 				var eqlResult = new EqlCommand(eqlCommand, eqlParams).Execute();
-				if (eqlResult != null && eqlResult is EntityRecordList && eqlResult.Count > 0)
+				if (eqlResult is EntityRecordList && eqlResult.Count > 0)
 				{
 					var relatedProjects = (List<EntityRecord>)eqlResult[0]["$project_nn_task"];
 					if (relatedProjects.Count > 0)

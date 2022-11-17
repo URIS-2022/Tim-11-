@@ -32,7 +32,7 @@ namespace WebVella.Erp.Hooks
 				throw new ArgumentException("entityName");
 
 			if (errors == null)
-				throw new ArgumentNullException("errors");
+				throw new ArgumentNullException(nameof(errors));
 
 			List<IErpPreCreateRecordHook> hookedInstances = HookManager.GetHookedInstances<IErpPreCreateRecordHook>(entityName);
 			foreach (var inst in hookedInstances)
