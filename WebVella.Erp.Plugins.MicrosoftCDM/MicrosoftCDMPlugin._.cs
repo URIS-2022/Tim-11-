@@ -9,7 +9,7 @@ using WebVella.Erp.Plugins.MicrosoftCDM.Model;
 
 namespace WebVella.Erp.Plugins.MicrosoftCDM
 {
-	public partial class MicrosoftCDMPlugin : ErpPlugin
+	public partial class MicrosoftCdmPlugin : ErpPlugin
 	{
 
 		private const int WEBVELLA_CRM_INIT_VERSION = 20200824;
