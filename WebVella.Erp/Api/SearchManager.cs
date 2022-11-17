@@ -186,7 +186,7 @@ namespace WebVella.Erp.Api
 				List<Guid> apps = null, List<Guid> records = null, string auxData = null, DateTime? timestamp = null)
 		{
 			SearchResult record = new SearchResult();
-			record.Id = new Guid();
+			record.Id = Guid.NewGuid();
 			record.Url = url ?? string.Empty;
 			record.Snippet = snippet ?? string.Empty;
 			record.Content = (content ?? string.Empty).ToLowerInvariant(); ;
