@@ -1,7 +1,7 @@
 ﻿$(function(){
 
 	function RunTimer(wvTimerEl) {
-		var recordRow = $(wvTimerEl).closest("tr");
+		let recordRow = $(wvTimerEl).closest("tr");
 		recordRow.addClass("go-bkg-orange-light");
 		var timerTd = $(wvTimerEl).closest('.timer-td');
 		var alreadyLoggedSecondsEl = timerTd.find("input[name='timelog_total_seconds']");
