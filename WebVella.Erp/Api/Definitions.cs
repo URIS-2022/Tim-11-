@@ -3,7 +3,7 @@ using System;
 
 namespace WebVella.Erp.Api
 {
-	public class SystemIds
+	public static class SystemIds
 	{
 		public static Guid SystemEntityId { get { return new Guid("a5050ac8-5967-4ce1-95e7-a79b054f9d14"); } }
 		public static Guid UserEntityId { get { return new Guid("b9cebc3b-6443-452a-8e34-b311a73dcc8b"); } }
