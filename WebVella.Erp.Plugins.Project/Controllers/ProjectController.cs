@@ -17,21 +17,15 @@ namespace WebVella.Erp.Plugins.Project.Controllers
 	[Authorize]
 	public class ProjectController : Controller
 	{
-		private const char RELATION_SEPARATOR = '.';
-		private const char RELATION_NAME_RESULT_SEPARATOR = '$';
 		
-		RecordManager recMan;
-		EntityManager entMan;
-		EntityRelationManager relMan;
-		SecurityManager secMan;
-		IErpService erpService;
+		readonly IErpService erpService;
 
 		public ProjectController(IErpService erpService)
 		{
-			recMan = new RecordManager();
-			secMan = new SecurityManager();
-			entMan = new EntityManager();
-			relMan = new EntityRelationManager();
+			RecordManager recMan = new RecordManager();
+			SecurityManager secMan = new SecurityManager();
+			EntityManager entMan = new EntityManager();
+			EntityRelationManager relMan = new EntityRelationManager();
 			this.erpService = erpService;
 		}
 
