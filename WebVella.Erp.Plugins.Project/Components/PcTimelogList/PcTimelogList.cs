@@ -98,8 +98,8 @@ namespace WebVella.Erp.Plugins.Project.Components
 								var eqlResult = new EqlCommand(eqlCommand, eqlParams).Execute();
 								if (eqlResult.Any()) {
 									var taskRecord = eqlResult[0];
-									if (taskRecord.Properties.ContainsKey("$project_nn_task") && taskRecord["$project_nn_task"] != null) {
-										if (((List<EntityRecord>)taskRecord["$project_nn_task"]).Any()) {
+									if (taskRecord.Properties.ContainsKey("$project_nn_task") && taskRecord["$project_nn_task"] != null && ((List<EntityRecord>)taskRecord["$project_nn_task"]).Any()) {
+										
 											var projectRecord = ((List<EntityRecord>)taskRecord["$project_nn_task"])[0];
 											if (projectRecord.Properties.ContainsKey("id") && projectRecord["id"] != null) {
 												relatedRecords.Add((Guid)projectRecord["id"]);
@@ -108,7 +108,7 @@ namespace WebVella.Erp.Plugins.Project.Components
 											{
 												ViewBag.IsBillable = (bool)projectRecord["is_billable"];
 											}
-										}
+										
 									}
 								}
 							}
