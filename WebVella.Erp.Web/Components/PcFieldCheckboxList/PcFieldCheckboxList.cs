@@ -174,7 +174,7 @@ namespace WebVella.Erp.Web.Components
 								return await Task.FromResult<IViewComponentResult>(View("Error"));
 							}
 						}
-						if (!stringProcessed && ((string)valueResult).Contains(",") && !((string)valueResult).Contains("{") && !((string)valueResult).Contains("["))
+						if (!stringProcessed && ((string)valueResult).Contains(',') && !((string)valueResult).Contains("{") && !((string)valueResult).Contains("["))
 						{
 							var valueArray = ((string)valueResult).Split(',');
 							model.Value = new List<string>(valueArray);
