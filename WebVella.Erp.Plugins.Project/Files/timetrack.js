@@ -100,11 +100,11 @@
     });
 
 	$(".stop-log").click(function(){
-        var clickedBtn = $(this);
-		var recordRow = clickedBtn.closest("tr");		
-		var inputTimelogStartEl = recordRow.find("input[name='timelog_started_on']");
-		var inputTaskId =  recordRow.find("input[name='task_id']");
-		var inputBillableStatus =  recordRow.find("input[name='is_billable']");
+        let clickedBtn = $(this);
+		let recordRow = clickedBtn.closest("tr");		
+		let inputTimelogStartEl = recordRow.find("input[name='timelog_started_on']");
+		let inputTaskId =  recordRow.find("input[name='task_id']");
+		let inputBillableStatus =  recordRow.find("input[name='is_billable']");
 		var billableStatusVal = inputBillableStatus.val();
 		var defaultBillableStatus = false;
 		if (billableStatusVal && billableStatusVal.toLowerCase() === "true") {
