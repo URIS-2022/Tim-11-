@@ -45,7 +45,7 @@ LEFT OUTER JOIN  {0} {1} ON {2}.{3} = {4}.{5}";
 
 		#endregion
 
-		private class SelectInfoWrapper
+		private sealed class SelectInfoWrapper
 		{
 			public Entity Entity { get; set; }
 

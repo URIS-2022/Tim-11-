@@ -119,7 +119,7 @@ namespace WebVella.Erp.Site.MicrosoftCDM
 			app.UseAuthorization();
 
 			app
-			.UseErpPlugin<MicrosoftCDMPlugin>()
+			.UseErpPlugin<MicrosoftCdmPlugin>()
 			.UseErpPlugin<SdkPlugin>()
 			.UseErp()
 			.UseErpMiddleware();

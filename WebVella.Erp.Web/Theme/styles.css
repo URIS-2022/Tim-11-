@@ -4450,7 +4450,7 @@ wv-pb-node-container > .wv-container-inner > .actions,
 	text-align: center;
 	display: none;
 	background: rgba(255,255,255,0.5);
-	padding: 2px 7px;
+	
 	box-shadow: 1px 1px 5px rgba(0,0,0,0.25);
 	border: 1px solid #ccc;
 	max-width: 200px;

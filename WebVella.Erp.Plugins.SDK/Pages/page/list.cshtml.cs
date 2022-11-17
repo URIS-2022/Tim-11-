@@ -66,7 +66,7 @@ namespace WebVella.Erp.Plugins.SDK.Pages.Page
 				switch (filter.Name)
 				{
 					default:
-					case "label":
+					
 						if (filter.Type == FilterType.CONTAINS)
 						{
 							pages = pages.FindAll(x => x.Label.ToLowerInvariant().Contains(filter.Value.ToLowerInvariant())).ToList();
