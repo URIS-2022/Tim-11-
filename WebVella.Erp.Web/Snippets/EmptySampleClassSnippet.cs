@@ -3,22 +3,25 @@ using System.Collections.Generic;
 using System.Text;
 using WebVella.Erp.Web.Models;
 
-
-public class EmptySampleClassSnippet : ICodeVariable
+namespace EmptySampleClassSnippet
 {
-	public object Evaluate(BaseErpPageModel pageModel)
-	{
-		try
-		{
-			if (pageModel == null)
-				return "";
 
-			return "Success DS boz";
-		}
-		catch (Exception ex)
+
+	public class EmptySampleClassSnippet : ICodeVariable
+	{
+		public object Evaluate(BaseErpPageModel pageModel)
 		{
-			return "Error: " + ex.Message;
+			try
+			{
+				if (pageModel == null)
+					return "";
+
+				return "Success DS boz";
+			}
+			catch (Exception ex)
+			{
+				return "Error: " + ex.Message;
+			}
 		}
 	}
 }
-
