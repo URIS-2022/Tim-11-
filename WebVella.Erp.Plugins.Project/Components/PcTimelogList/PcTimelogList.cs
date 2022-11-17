@@ -44,12 +44,17 @@ namespace WebVella.Erp.Plugins.Project.Components
 					return await Task.FromResult<IViewComponentResult>(Content("Error: The node Id is required to be set as query parameter 'nid', when requesting this component"));
 				}
 
+				
 				var pageFromModel = context.DataModel.GetProperty("Page");
-				if (pageFromModel == null)
+
+                var nova = pageFromModel as ErpPage;
+
+				if (nova == null)
 				{
 					return await Task.FromResult<IViewComponentResult>(Content("Error: PageModel cannot be null"));
 				}
-				else if (pageFromModel is ErpPage)
+
+				else if (nova != null)
 				{
 					currentPage = (ErpPage)pageFromModel;
 				}
