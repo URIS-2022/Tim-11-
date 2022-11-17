@@ -9,7 +9,7 @@ namespace WebVella.Erp.Jobs
 		protected async override Task ExecuteAsync(CancellationToken stoppingToken)
 		{
 			while (ScheduleManager.Current == null)
-				await Task.Delay(1000);
+				await Task.Delay(1000, stoppingToken);
 
 			ScheduleManager.Current.ProcessSchedulesAsync(stoppingToken);
 			await Task.FromResult(0);
