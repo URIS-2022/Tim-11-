@@ -8,7 +8,7 @@ namespace WebVella.Erp.Api
 		public static Guid SystemEntityId { get { return new Guid("a5050ac8-5967-4ce1-95e7-a79b054f9d14"); } }
 		public static Guid UserEntityId { get { return new Guid("b9cebc3b-6443-452a-8e34-b311a73dcc8b"); } }
 		public static Guid RoleEntityId { get { return new Guid("c4541fee-fbb6-4661-929e-1724adec285a"); } }
-		public static Guid AreaEntityId = new Guid("cb434298-8583-4a96-bdbb-97b2c1764192");
+		public static readonly Guid AreaEntityId = new Guid("cb434298-8583-4a96-bdbb-97b2c1764192");
 
 		public static Guid UserRoleRelationId { get { return new Guid("0C4B119E-1D7B-4B40-8D2C-9E447CC656AB"); } }
 
