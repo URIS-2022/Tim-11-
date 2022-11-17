@@ -13,9 +13,11 @@ namespace WebVella.Erp.Plugins.Next
 		private static void Patch20190203(EntityManager entMan, EntityRelationManager relMan, RecordManager recMan)
 		{
 			#region << ***Create entity*** Entity name: timelog >>
-			{
+			void timelog157()
+            {
 				#region << entity >>
-				{
+				void e157()
+                {
 					var entity = new InputEntity();
 					var systemFieldIdDictionary = new Dictionary<string, Guid>();
 					systemFieldIdDictionary["id"] = new Guid("829b8572-0084-40e2-b589-c4e8dc7cbbd7");
@@ -44,18 +46,23 @@ namespace WebVella.Erp.Plugins.Next
 					//DELETE
 					entity.RecordPermissions.CanDelete.Add(new Guid("f16ec6db-626d-4c27-8de0-3e7ce542c55f"));
 					entity.RecordPermissions.CanDelete.Add(new Guid("bdc56420-caf0-4030-8a0e-d264938e0cda"));
-					{
+					void delete157()
+                    {
 						var response = entMan.CreateEntity(entity, systemFieldIdDictionary);
 						if (!response.Success)
 							throw new Exception("System error 10050. Entity: timelog creation Message: " + response.Message);
 					}
+                    delete157();
 				}
+                e157();
 				#endregion
 			}
+            timelog157();
 			#endregion
 
 			#region << ***Create field***  Entity: timelog Field Name: body >>
-			{
+			void body157()
+            {
 				InputMultiLineTextField textareaField = new InputMultiLineTextField();
 				textareaField.Id = new Guid("07fdec6b-5442-47c8-aa66-76e506932af1");
 				textareaField.Name = "body";
@@ -77,12 +84,15 @@ namespace WebVella.Erp.Plugins.Next
 				textareaField.Permissions.CanUpdate = new List<Guid>();
 				//READ
 				//UPDATE
-				{
+				void update157()
+                {
 					var response = entMan.CreateField(new Guid("750153c5-1df9-408f-b856-727078a525bc"), textareaField, false);
 					if (!response.Success)
 						throw new Exception("System error 10060. Entity: timelog Field: body Message:" + response.Message);
 				}
+                update157();
 			}
+            body157();
 			#endregion
 
 			#region << ***Create field***  Entity: timelog Field Name: created_by >>
